@@ -1,0 +1,23 @@
+{
+    "window.menuBarVisibility": "toggle",
+    "workbench.statusBar.visible": false,
+    "workbench.activityBar.visible": false,
+    "editor.cursorStyle": "line-thin",
+    "editor.cursorBlinking": "solid",
+    "editor.dragAndDrop": false,
+    "editor.fontFamily": "Code New Roman",
+    "editor.fontSize": 16,
+    "editor.minimap.enabled": false,
+    "editor.mouseWheelZoom": false,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": false
+    },
+    "editor.renderLineHighlight": "all",
+    "editor.smoothScrolling": true,
+    "files.hotExit": "onExit",
+    "files.autoSave": "onFocusChange",
+    "window.zoomLevel": 0,
+    "window.titleBarStyle": "native",
+}

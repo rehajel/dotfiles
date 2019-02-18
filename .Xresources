@@ -28,7 +28,7 @@ URxvt*scrollBar:        false
 URxvt*borderless: 	1
 URxvt*saveLines:  	5000
 URxvt*transparent: 	true
-Urxvt*shading: 		14
+Urxvt*shading: 		9
 urxvt*transparent:	true
 urxvt*background: 	black
 urxvt*foreground:	white

@@ -27,8 +27,9 @@ URxvt*urlLauncher:      firefox
 URxvt*scrollBar:        false
 URxvt*borderless: 	1
 URxvt*saveLines:  	5000
-URxvt*transparent: 	true
-Urxvt*shading: 		9
+!URxvt*transparent: 	true
+!Urxvt*shading: 		9
 urxvt*transparent:	true
-urxvt*background: 	black
+urxvt*depth:		32
+urxvt*background: 	[80]black
 urxvt*foreground:	white

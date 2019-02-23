@@ -203,6 +203,9 @@ bar {
 # open code with mod+c
 bindsym $mod+c exec code
 
+# lock with mod+shift+x
+bindsym $mod+shift+x exec i3lock-fancy -p -n
+
 # rofi instead of dmenu
 # bindsym $mod+d exec rofi -show run -lines 5 -width 100 -padding 800 -eh 2 -bw 0 -opacity "85" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 16"
 bindsym $mod+d exec --no-startup-id rofi -show drun
@@ -242,5 +245,5 @@ bindsym $mod+i exec firefox
 
 # startup apps
 exec_always --no-startup-id feh --bg-scale /home/rehajel/Wallpapers/RedMountains.jpg
-exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy -f Source-Sans-Pro"
+#exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy -f Source-Sans-Pro"
 #exec --no-startup-id compton

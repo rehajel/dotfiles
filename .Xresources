@@ -22,8 +22,8 @@
 !------------------------------------------------------------------------------
 ! u r x v t
 
-URxvt*font:		xft:Code New Roman:size=12
-!URxvt*font:		xft:Source Code Pro:size=12
+!URxvt*font:		xft:Code New Roman:size=12
+URxvt*font:		xft:Source Code Pro:size=12
 !URxvt*font:		xft:Source Code Pro Light:size=12
 URxvt*urlLauncher:      firefox  
 URxvt*scrollBar:        false

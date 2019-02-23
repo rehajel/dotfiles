@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -17,9 +17,7 @@ set $mod Mod1
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Code New Roman 13
-
-
+font pango:Source Sans Pro 13
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -42,7 +40,7 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -78,9 +76,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+x layout toggle split
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+x layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -167,6 +165,16 @@ bindsym $mod+r mode "resize"
 
 ######## my additions #########
 
+# class                 border  backgr. text    indicator child_border
+client.focused          #2b83a6 #2b83a6 #ffffff #dddddd   #2b83a6
+client.focused_inactive #212121 #212121 #86888c #292d2e   #5a5a5a
+client.unfocused        #212121 #212121 #86888c #292d2e   #5a5a5a
+client.urgent           #d64e4e #d64e4e #ffffff #d64e4e   #d64e4e
+client.placeholder      #212121 #0c0c0c #ffffff #212121   #262626
+client.background       #212121
+
+# bar
+
 # set color scheme
 set $border-color        #ffffff
 set $bg-color 	         #2f343f
@@ -175,35 +183,48 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
-# window colors
-#                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $iancative-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $iancative-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.urgent $urgent-bg-color $urgent-bg-color $text-color #00ff00
-
-# bar
 bar {
   	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	colors {
-		background $bg-coloru3kKna6kZN4UNyu3kKna6kZN4UNyu3kKna6kZN4UNyu3kKna6kZN4UNy
-	    	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
+
+        colors {
+                background  #212121
+                statusline  #dddddd
+                separator   #666666
+                # class             border  backgr. text
+                focused_workspace   #2b83a6 #2b83a6 #ffffff
+                active_workspace    #212121 #212121 #ffffff
+                inactive_workspace  #212121 #212121 #86888c
+                urgent_workspace    #d64e4e #d64e4e #ffffff
+                binding_mode        #229c56 #229c56 #ffffff
+        }
 }
 
 
+# open code with mod+c
+bindsym $mod+c exec code
+
 # rofi instead of dmenu
 # bindsym $mod+d exec rofi -show run -lines 5 -width 100 -padding 800 -eh 2 -bw 0 -opacity "85" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 16"
+bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # open filemanager with mod+e
 bindsym $mod+e exec thunar
 
-# make filemanager always floating
-for_window [class="Thunar"] floating enable
+# make some apps always floating
+for_window [class="Thunar"]             floating enable
+for_window [window_role="app"]          floating enable
+for_window [window_role="pop-up"]       floating enable
+for_window [window_role="task_dialog"]  floating enable
+for_window [title="Preferences$"]       floating enable
+for_window [class="Galculator"]         floating enable
+for_window [class="Lxappearance"]       floating enable
+for_window [class="Menu"]               floating enable
+
+# borders?
+
+default_border  none
+default_floating_border none
+hide_edge_borders none
 
 # i3-gaps configuration
 
@@ -213,8 +234,13 @@ for_window [class="^.*"] border pixel 2
 # gaps definitions
 smart_gaps on
 smart_borders no_gaps
-gaps inner 15
+#gaps inner 15
+gaps inner 7
+#gaps outer 5
 
 bindsym $mod+i exec firefox
 
+# startup apps
 exec_always --no-startup-id feh --bg-scale /home/rehajel/Wallpapers/RedMountains.jpg
+exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy -f Source-Sans-Pro"
+#exec --no-startup-id compton

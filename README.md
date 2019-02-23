@@ -2,11 +2,20 @@
 
 sudo pacman -S lxappearance
 
+https://github.com/dikiaap/dotfiles
+
+### Install Source Code Pro and Source Sans Pro:
+
+pacman -S adobe-source-code-pro-fonts
+pacman -S adobe-source-sans-pro-fonts
+
 ### Font in lxappearance:
 
-SFNS Display:
+--SFNS Display:
 
-https://github.com/supermarin/YosemiteSanFranciscoFont
+--https://github.com/supermarin/YosemiteSanFranciscoFont
+
+++Source Sans Pro (see install instructions above)
 
 ### arc theme:
 sudo pacman -S arc-gtk-theme

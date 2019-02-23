@@ -23,13 +23,14 @@
 ! u r x v t
 
 URxvt*font:		xft:Code New Roman:size=12
+!URxvt*font:		xft:Source Code Pro:size=12
+!URxvt*font:		xft:Source Code Pro Light:size=12
 URxvt*urlLauncher:      firefox  
 URxvt*scrollBar:        false
 URxvt*borderless: 	1
 URxvt*saveLines:  	5000
 !URxvt*transparent: 	true
 !Urxvt*shading: 		9
-urxvt*transparent:	true
 urxvt*depth:		32
 urxvt*background: 	[80]black
 urxvt*foreground:	white

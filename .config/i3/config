@@ -216,6 +216,8 @@ for_window [title="Preferences$"]       floating enable
 for_window [class="Galculator"]         floating enable
 for_window [class="Lxappearance"]       floating enable
 for_window [class="Menu"]               floating enable
+#for_window [class="Yad"]                floating enable
+#for_window [class="Gsimplecal"] geometry {"x": 30, "y": 30, "width": 350, "height": 150}
 
 # gaps definitions
 smart_gaps on

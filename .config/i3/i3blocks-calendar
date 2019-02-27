@@ -1,0 +1,7 @@
+#! /bin/sh
+SHORTFMT=${SHORTFMT:-"+%_a   %d.%m.%Y  "}
+case "$BLOCK_BUTTON" in
+  1|2|3) 
+    i3-msg -q "exec --no-startup-id gsimplecal"
+esac
+echo "$LABEL$(date "$SHORTFMT")"

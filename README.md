@@ -33,3 +33,7 @@ https://addons.mozilla.org/en-US/firefox/addon/arc-theme-we/
 
 ### file manager:
 pacman -S thunar
+
+### refind theme
+
+https://github.com/EvanPurkhiser/rEFInd-minimal

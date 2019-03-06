@@ -3,5 +3,5 @@ mark_today = 1
 close_on_unfocus = 1
 mainwindow_resizable = 0
 mainwindow_position = mouse
-mainwindow_xoffset = -55
-mainwindow_yoffset = -50
+mainwindow_xoffset = -32
+mainwindow_yoffset = -35

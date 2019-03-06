@@ -10,11 +10,7 @@
 #define oxide_15_bright_white   #f3f4f5
 
 *foreground:   oxide_07_white
-!ifdef background_opacity
-*background:   [80]oxide_00_black
-!else
-!*background:   oxide_00_black
-!endif
+*background:   oxide_00_black
 *cursorColor: oxide_07_white
 
 *color0:       oxide_00_black
@@ -45,5 +41,5 @@ URxvt*saveLines:  	    5000
 !URxvt*transparent: 	true
 !Urxvt*shading: 		9
 urxvt*depth:		    32
-urxvt*background: 	    [80]oxide_00_black
+!urxvt*background: 	    [80]oxide_00_black
 !urxvt*foreground:	    #c0c5ce

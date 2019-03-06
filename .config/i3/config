@@ -204,6 +204,9 @@ default_border  none
 default_floating_border none
 hide_edge_borders none
 
+# disable focus wrapping
+focus_wrapping no
+
 # disable titlebars
 for_window [class="^.*"] border pixel 2
 
@@ -231,28 +234,32 @@ bindsym $mod+shift+x exec i3lock-fancy -p -n
 
 # bind application to keys
 bindsym $mod+i exec firefox
-bindsym $mod+m exec --no-startup-id urxvt -e cmus
+bindsym $mod+m exec --no-startup-id i3-sensible-terminal -e cmus
 bindsym $mod+c exec --no-startup-id code
 bindsym $mod+e exec thunar
-bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show run
 
 # startup apps
-exec_always --no-startup-id feh --bg-scale /home/rehajel/Wallpapers/RedMountains.jpg
-exec --no-startup-id urxvt -e cmus
+exec_always --no-startup-id feh --bg-scale ~/Wallpapers/Climbing/MoonLoveComic.png
+exec --no-startup-id compton -bc -d:0 --config ~/.config/compton.conf
+exec_always --no-startup-id autorandr -c
+#exec --no-startup-id urxvt -e cmus
 #exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy -f Source-Sans-Pro"
-#exec --no-startup-id comptoni
 
 # assign apps to workspaces
 assign [class="^URxvt$" title="^cmus$"] → $ws10
 
+set $leftscreen HDMI2
+set $rightscreen DP1
+
 # workspaces and screens
-workspace $ws1  output Virtual2 Virtual1
-workspace $ws2  output Virtual1 Virtual2
-workspace $ws3  output Virtual1 Virtual2
-workspace $ws4  output Virtual1 Virtual2
-workspace $ws5  output Virtual2 Virtual1
-workspace $ws6  output Virtual1 Virtual2
-workspace $ws7  output Virtual1 Virtual2
-workspace $ws8  output Virtual1 Virtual2
-workspace $ws9  output Virtual1 Virtual2
-workspace $ws10 output Virtual2 Virtual1
+workspace $ws1  output $leftscreen $rightscreen
+workspace $ws2  output $rightscreen $leftscreen
+workspace $ws3  output $rightscreen $leftscreen
+workspace $ws4  output $rightscreen $leftscreen
+workspace $ws5  output $leftscreen $rightscreen
+workspace $ws6  output $rightscreen $leftscreen
+workspace $ws7  output $rightscreen $leftscreen
+workspace $ws8  output $rightscreen $leftscreen
+workspace $ws9  output $rightscreen $leftscreen
+workspace $ws10 output $leftscreen $rightscreen

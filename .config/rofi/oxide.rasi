@@ -4,7 +4,7 @@
  * Repository: https://github.com/dikiaap/dotfiles
  * License: MIT
  **/
-* {
+*{
     selected-normal-foreground:  @lightfg;
     foreground:                  rgba ( 196, 202, 212, 100 % );
     normal-foreground:           @foreground;

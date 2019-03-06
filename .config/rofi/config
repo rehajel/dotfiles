@@ -1,7 +1,9 @@
 ! Rofi config file
-rofi.lines: 12
+rofi.lines: 5
 rofi.font: Source Sans Pro 12
 rofi.show-icons: true
+!rofi.theme: ~/.config/rofi/arthur.rasi
 rofi.theme: ~/.config/rofi/oxide.rasi
+!rofi.fullscreen: true
 rofi.display-window: Window
 rofi.display-drun: Search

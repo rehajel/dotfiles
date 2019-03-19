@@ -17,7 +17,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Source Sans Pro 13
+font pango:Source Sans Pro 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -103,7 +103,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10-music"
+set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -183,21 +183,21 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
-bar {
-  	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#bar {
+#  	status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
-        colors {
-                background  #212121
-                statusline  #dddddd
-                separator   #666666
+#       colors {
+#                background  #212121
+#                statusline  #dddddd
+#                separator   #666666
                 # class             border  backgr. text
-                focused_workspace   #2b83a6 #2b83a6 #ffffff
-                active_workspace    #212121 #212121 #ffffff
-                inactive_workspace  #212121 #212121 #86888c
-                urgent_workspace    #d64e4e #d64e4e #ffffff
-                binding_mode        #229c56 #229c56 #ffffff
-        }
-}
+#                focused_workspace   #2b83a6 #2b83a6 #ffffff
+#                active_workspace    #212121 #212121 #ffffff
+#                inactive_workspace  #212121 #212121 #86888c
+#                urgent_workspace    #d64e4e #d64e4e #ffffff
+#                binding_mode        #229c56 #229c56 #ffffff
+#        }
+#}
 
 # borders?
 default_border  none
@@ -225,7 +225,7 @@ for_window [class="Menu"]               floating enable
 # gaps definitions
 smart_gaps on
 smart_borders no_gaps
-gaps inner 7
+gaps inner 3
 #gaps inner 15
 #gaps outer 5
 
@@ -243,24 +243,31 @@ bindsym $mod+d exec --no-startup-id rofi -show run
 exec_always --no-startup-id feh --bg-scale ~/Wallpapers/Climbing/MoonLoveComic.png
 exec --no-startup-id compton -bc -d:0 --config ~/.config/compton.conf
 exec_always --no-startup-id autorandr -c
+exec --no-startup-id "i3-msg 'workspace 9; append_layout /home/rehajel/.config/i3/workspace-9.json'"
+exec --no-startup-id telegram-desktop
+exec --no-startup-id discord
+exec --no-startup-id unclutter &
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec --no-startup-id urxvt -e cmus
 #exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy -f Source-Sans-Pro"
 
 # assign apps to workspaces
 #assign [class="Alacritty" title="cmus"] → $ws10
 for_window [class="Alacritty" title="cmus"] move to workspace $ws10
+#assign [class="discord"] $ws9
 
-set $leftscreen HDMI2
-set $rightscreen DP1
+set $leftscreen eDP1
+set $middlescreen DP1
+set $rightscreen HDMI2
 
 # workspaces and screens
-workspace $ws1  output $leftscreen $rightscreen
-workspace $ws2  output $rightscreen $leftscreen
-workspace $ws3  output $rightscreen $leftscreen
-workspace $ws4  output $rightscreen $leftscreen
-workspace $ws5  output $leftscreen $rightscreen
+workspace $ws1  output $middlescreen $leftscreen $rightscreen
+workspace $ws2  output $middlescreen $rightscreen $leftscreen
+workspace $ws3  output $middlescreen $rightscreen $leftscreen
+workspace $ws4  output $middlescreen $rightscreen $leftscreen
+workspace $ws5  output $rightscreen $leftscreen
 workspace $ws6  output $rightscreen $leftscreen
 workspace $ws7  output $rightscreen $leftscreen
-workspace $ws8  output $rightscreen $leftscreen
-workspace $ws9  output $rightscreen $leftscreen
+workspace $ws8  output $leftscreen $rightscreen
+workspace $ws9  output $leftscreen $rightscreen
 workspace $ws10 output $leftscreen $rightscreen

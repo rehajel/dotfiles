@@ -15,5 +15,4 @@ alias dotfiles='/usr/bin/git --git-dir=/home/rehajel/.dotfiles/ --work-tree=/hom
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
 alias wakeup='/usr/bin/wol 30:9c:23:5e:ed:94'
 alias virtualhere='sudo /home/rehajel/vhusbdx86_64'
-alias v='exec code $1'
-alias vs='exec sudo code $1'
+bindkey -v

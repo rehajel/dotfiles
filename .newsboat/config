@@ -1,0 +1,38 @@
+urls-source "inoreader"
+inoreader-passwordfile "/home/rehajel/.newsboat/inoreader.login"
+inoreader-login "rehajel"
+inoreader-min-items 100
+inoreader-show-special-feeds no
+
+color listfocus color110 color235
+color listfocus_unread color110 color235
+color listnormal color188 default
+color listnormal_unread color188 default
+color info color110 color235
+
+auto-reload yes
+reload-threads 10
+browser "qutebrowser %u"
+feed-sort-order firsttag
+feedlist-title-format "%N  Your Feeds"
+feedlist-format "%4U %t"
+articlelist-title-format "%N Feed %T"
+articlelist-format "%f %8T - %t"
+prepopulate-query-feeds yes
+
+swap-title-and-hints yes
+show-keymap-hint no
+show-read-articles yes
+show-read-feeds no
+
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key h quit
+bind-key J end
+bind-key K home
+bind-key i mark-all-above-as-read
+bind-key n toggle-article-read
+bind-key N mark-feed-read
+
+unbind-key C

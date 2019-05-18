@@ -1,0 +1,5 @@
+#!/bin/bash
+status=$( acpi -b | cut -f2 -d ":" | cut -c2- | cut -f1 -d "," )
+percent=$( acpi -b | cut -f2 -d ":" | cut -f2 -d "," | cut -c2- )
+remaining=$( acpi -b | cut -f3 -d "," )
+notify-send --app-name=mynotif " " "<span size='large'>$percent</span>\n$remaining\n<span size='x-small'>($status)</span>"

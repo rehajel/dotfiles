@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Configuration
+interval=120    #in seconds
+critical_level=15    #percent
+
+while true
+do
+    if [ "$(acpi -a | grep -o off)" == "off" ]; then
+        battery_level=`acpi -b | sed 's/.*[dg], //g;s/\%,.*//g'`
+        [ $battery_level -le $critical_level ] && \
+        notify-send -u critical -t 15000 \
+        "Battery level is low!" "Only $battery_level% of the charge remains."
+    fi
+    sleep $interval
+done

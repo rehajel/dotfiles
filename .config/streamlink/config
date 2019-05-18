@@ -1,5 +1,5 @@
 twitch-oauth-token=8n0pputw8ssbg16fe2k4zwrxbz6llw
-player=vlc --file-caching=10000 --network-caching=10000
+player=mpv --cache=10000 
 player-no-close
 player-passthrough=hls,http,rtmp
 hds-segment-threads 3
@@ -7,4 +7,4 @@ hls-segment-threads 3
 player-continuous-http
 quiet
 title={author} - {title} - {category}
-default-stream 1080p60
+default-stream 1080p60,best

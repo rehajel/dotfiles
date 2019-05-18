@@ -131,7 +131,7 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+# bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -183,7 +183,7 @@ hide_edge_borders none
 focus_wrapping no
 
 # disable titlebars
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1
 
 # make some apps always floating
 for_window [class="Thunar"]             floating enable
@@ -194,41 +194,68 @@ for_window [title="Preferences$"]       floating enable
 for_window [class="Galculator"]         floating enable
 for_window [class="Lxappearance"]       floating enable
 for_window [class="Menu"]               floating enable
-#for_window [class="Yad"]                floating enable
+for_window [class="Alacritty" title="^calendar$"] floating enable
+for_window [class="feh" title="album"] floating enable
+#for_window [class="URxvt" title="calendar"] floating enable
+for_window [class="Yad"]                floating enable
 #for_window [class="Gsimplecal"] geometry {"x": 30, "y": 30, "width": 350, "height": 150}
+#for_window [class="mpv"]		fullscreen enable
 
 # gaps definitions
 smart_gaps on
-smart_borders no_gaps
-gaps inner 5
+#smart_borders no_gaps
+smart_borders on
+#gaps inner 3
 #gaps inner 15
 #gaps outer 5
 
 # lock with mod+shift+x
 bindsym $mod+shift+x exec i3lock-fancy -p -n
 
-# bind application to keys
-bindsym $mod+i exec firefox
-bindsym $mod+m exec --no-startup-id i3-sensible-terminal -e cmus
-bindsym $mod+c exec --no-startup-id code
+# bind apps to keys
+#bindsym $mod+i exec firefox
+bindsym $mod+i exec --no-startup-id qutebrowser
+bindsym $mod+m exec --no-startup-id i3-sensible-terminal --title cmus -e cmus
+#bindsym $mod+c exec --no-startup-id code
 bindsym $mod+e exec thunar
 bindsym $mod+d exec --no-startup-id rofi -show run
+
+# bind scripts etc. to keys
+bindsym $mod+c exec --no-startup-id sh ~/.scripts/clock
+bindsym $mod+s exec --no-startup-id sh ~/.scripts/cmus_notify
+bindsym $mod+shift+c exec --no-startup-id  ~/.config/polybar/popupcalendar.sh --popup
+bindsym $mod+b exec --no-startup-id ~/.scripts/battery_status
+bindsym $mod+shift+P exec xdotool search --class mpv | xargs -I % xdotool key --window % p
+
+# cmus-remote bindings
+bindsym $mod+F1 exec --no-startup-id cmus-remote -u
+bindsym $mod+F2 exec --no-startup-id cmus-remote -r
+bindsym $mod+F3 exec --no-startup-id cmus-remote -n
+bindsym $mod+p exec --no-startup-id cmus-remote -u
+bindsym $mod+n exec --no-startup-id cmus-remote -n
 
 # startup apps
 exec_always --no-startup-id feh --bg-scale ~/Wallpapers/Climbing/MoonLoveComic.png
 exec --no-startup-id compton -bc --config ~/.config/compton.conf
-exec_always --no-startup-id autorandr -c
+#exec_always --no-startup-id autorandr -c
 exec --no-startup-id "i3-msg 'workspace 9; append_layout /home/rehajel/.config/i3/workspace-9.json'"
 exec --no-startup-id telegram-desktop
 exec --no-startup-id discord
 exec --no-startup-id unclutter &
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always --no-startup-id $HOME/.config/polybar/launchminimal.sh
+exec --no-startup-id dunst &
+exec --no-startup-id bitwarden-bin
+#exec --no-startup-id calcurse --daemon
 #exec --no-startup-id urxvt -e cmus
 #exec --no-startup-id xautolock -time 10 -locker "i3lock-fancy -f Source-Sans-Pro"
 
+# startup scripts
+exec --no-startup-id sh ~/.scripts/battery_notify
+
 # assign apps to workspaces
-#assign [class="Alacritty" title="cmus"] → $ws10
-for_window [class="Alacritty" title="cmus"] move to workspace $ws10
+assign [class="Alacritty" title="cmus"] → $ws10
+assign [class="Bitwarden"] → $ws8
+#for_window [class="Alacritty" title="cmus"] move to workspace $ws10
 #assign [class="discord"] $ws9
 
 set $leftscreen eDP1
@@ -240,7 +267,7 @@ workspace $ws1  output $middlescreen $leftscreen $rightscreen
 workspace $ws2  output $middlescreen $rightscreen $leftscreen
 workspace $ws3  output $middlescreen $rightscreen $leftscreen
 workspace $ws4  output $middlescreen $rightscreen $leftscreen
-workspace $ws5  output $rightscreen $leftscreen
+workspace $ws5  output $middlescreen $rightscreen $leftscreen
 workspace $ws6  output $rightscreen $leftscreen
 workspace $ws7  output $rightscreen $leftscreen
 workspace $ws8  output $leftscreen $rightscreen

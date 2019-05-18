@@ -1,0 +1,8 @@
+#!/bin/sh
+song=$( cmus-remote -Q | grep "tag title" | cut -f3- -d" ")
+artist=$( cmus-remote -Q | grep "tag artist " | cut -f3- -d" ")
+album=$( cmus-remote -Q | grep "tag album " | cut -f3- -d" " )
+position=$( date -d@$( cmus-remote -Q | grep "position " | cut -f2- -d" ") -u +%M:%S )
+duration=$( date -d@$( cmus-remote -Q | grep "duration " | cut -f2- -d" ") -u +%M:%S )
+
+notify-send --app-name=mynotif " " "<span size='large'>$song</span>\n$artist<i>\n $album</i>\n$position / $duration"

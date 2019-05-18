@@ -13,8 +13,8 @@ if type "xrandr"; then
 	for m in $(xrandr --query | grep "primary" | cut -d" " -f1); do
 		MONITOR=$m polybar main -r &
 	done
-	for m in $(xrandr --query | grep " connected" | grep -v "primary" | cut -d" " -f1); do
-		MONITOR=$m polybar sidebar -r &
+	for m in $(xrandr --query | grep " connected" | grep -v "primary" | grep -v "eDP1" | cut -d" " -f1); do
+		MONITOR=$m polybar main -r &
         done
 else
 	polybar -r main &

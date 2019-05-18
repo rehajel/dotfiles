@@ -36,12 +36,15 @@ twm &
 xclock -geometry 50x50-1+1 &
 # xterm -geometry 80x50+494+51 &
 # xterm -geometry 80x20+494-0 &
-setxkbmap -layout de nodeadkeys
+setxkbmap -layout us -variant altgr-intl
+udiskie &
 # numlockx &
 
 if [ $(xrandr --query | grep ' connected' | wc -l) == 3 ]
 then
-	xrandr --output eDP1 --mode 1920x1080 --rate 60 --output DP1 --primary --mode 1920x1080 --right-of eDP1 --rate 60 --output HDMI2 --mode 1920x1080 --rate 60 --right-of DP1 --dpi 96
+	xrandr --output eDP1 --off --output DP1 --primary --mode 1920x1080 --right-of eDP1 --rate 60 --output HDMI2 --mode 1920x1080 --rate 60 --right-of DP1 --dpi 96
 fi
 
-exec i3
+#exec i3
+#exec qtile
+exec xmonad

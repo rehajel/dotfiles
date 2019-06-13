@@ -42,9 +42,10 @@ udiskie &
 
 if [ $(xrandr --query | grep ' connected' | wc -l) == 3 ]
 then
-	xrandr --output eDP1 --off --output DP1 --primary --mode 1920x1080 --right-of eDP1 --rate 60 --output HDMI2 --mode 1920x1080 --rate 60 --right-of DP1 --dpi 96
+	xrandr --output eDP1 --off --output DP1 --primary --mode 1920x1080 --rate 60 --right-of eDP1 --output HDMI2 --mode 1920x1080 --rate 60 --right-of DP1 --dpi 96
 fi
 
 #exec i3
 #exec qtile
+xsetroot -cursor_name left_ptr
 exec xmonad

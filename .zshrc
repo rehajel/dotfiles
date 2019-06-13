@@ -24,6 +24,8 @@ alias vim='/usr/bin/nvim'
 alias lah='ls -lah --color=always | less -R'
 alias x='exit'
 alias xlog='vim .local/share/xorg/Xorg.0.log'
+alias msync='/usr/bin/unison -auto /mnt/fs01/Music ~/Music'
+alias c='clear'
 
 spacman(){
 	unbuffer pacman -Ss "$@" | less -R

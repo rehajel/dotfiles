@@ -3,6 +3,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
 import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn
+import XMonad.Util.SpawnOnce
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Grid
 import qualified XMonad.StackSet as W
@@ -13,11 +14,14 @@ myNormalBorderColor = "#5a5a5a"
 myFocusedBorderColor = "#B0BEC5"
 myBorderWidth = 1
 myModMask = mod4Mask
+myTerminal = "alacritty"
 cmus = myTerminal ++ " --title cmus -e cmus"
 newsboat = myTerminal ++ " --title newsboat -e newsboat"
-myTerminal = "alacritty"
+pulsemixer = myTerminal ++ " --title pulsemixer -e pulsemixer"
 myLauncher = "/usr/bin/rofi -show run"
 myWorkspaces = ["1","2","3","4","5","6","7","8","9","0"]
+myFocusFollowsMouse = False
+myClickJustFocuses = False
 
 ---- APP RULES
 myManageHook = composeAll [
@@ -26,6 +30,7 @@ myManageHook = composeAll [
     className =? "discord"          --> doShift "9",
     --className =? "Bitwarden"        --> doShift "8",
     className =? "Yad"              --> doFloat,
+    title     =? "pulsemixer"       --> doFloat,
     className =? "Thunar"           --> doFloat]
 
 ---- STARTUP
@@ -39,15 +44,14 @@ myStartupHook = do
     -- Focus the first screen again.
     screenWorkspace 0 >>= flip whenJust (windows . W.view)
     -- Launch Startup Stuff
-    spawnOn "9" "discord"
-    spawnOn "8" "bitwarden-bin"
-    spawnOn "9" "telegram-desktop"
+    spawnOnOnce "9" "discord"
+    spawnOnOnce "8" "bitwarden-bin"
+    spawnOnOnce "9" "telegram-desktop"
     spawn "feh --bg-scale ~/Wallpapers/Climbing/MoonLoveComic.png"
-    spawn "compton -bc --config ~/.config/compton.conf"
-    spawn "unclutter &"
-    spawn "dunst &"
-    spawn "~/.scripts/battery_notify"
-myFocusFollowsMouse = False
+    spawnOnce "compton -bc --config ~/.config/compton.conf"
+    spawnOnce "unclutter &"
+    spawnOnce "dunst &"
+    spawnOnce "~/.scripts/battery_notify"
 
 ---- KEY CONFIG
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -68,7 +72,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       -- Move Windows in Layout
       ((modMask .|. shiftMask,      xK_j),              windows W.swapDown),
       ((modMask .|. shiftMask,      xK_k),              windows W.swapUp),
-      ((modMask .|. shiftMask,      xK_Return),         windows W.swapMaster),
+      ((modMask .|. shiftMask,      xK_space),         windows W.swapMaster),
       -- Change Size
       ((modMask,                    xK_l),              sendMessage Expand),
       ((modMask,                    xK_h),              sendMessage Shrink),
@@ -79,19 +83,20 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       -- Kill App
       ((modMask .|. shiftMask,      xK_x),              kill),
       --Spawn Apps
-      ((modMask,                    xK_d),              spawn "/usr/bin/rofi -show run"),
-      ((modMask,                    xK_i),              spawn "qutebrowser"),
+      ((modMask,                    xK_d),              spawnHere "/usr/bin/rofi -show run"),
+      ((modMask,                    xK_i),              spawnHere "qutebrowser"),
       ((modMask,                    xK_m),              spawn cmus), 
-      ((modMask,                    xK_Return),         spawn $ XMonad.terminal conf),
+      ((modMask,                    xK_Return),         spawnHere myTerminal),
       ((modMask,                    xK_e),              spawnOn "7" "thunar"),
-      ((modMask .|. shiftMask,      xK_n),              spawn newsboat),
-      ((modMask,                    xK_c),              spawn "~/.scripts/clock"),
-      ((modMask .|. shiftMask,      xK_c),              spawn "~/.scripts/popupcalendar --popup"),
-      ((modMask,                    xK_s),              spawn "~/.scripts/cmus_notify"),
-      ((modMask,                    xK_b),              spawn "~/.scripts/battery_status"),
-      ((modMask .|. shiftMask,      xK_p),              spawn "~/.scripts/pauseallmpv"),
-      ((modMask,                    xK_p),              spawn "cmus-remote -u"),
-      ((modMask,                    xK_n),              spawn "cmus-remote -n")
+      ((modMask .|. shiftMask,      xK_n),              spawnHere newsboat),
+      ((modMask,                    xK_c),              spawnHere "~/.scripts/clock"),
+      ((modMask .|. shiftMask,      xK_c),              spawnHere "~/.scripts/popupcalendar --popup"),
+      ((modMask,                    xK_s),              spawnHere "~/.scripts/cmus_notify"),
+      ((modMask,                    xK_b),              spawnHere "~/.scripts/battery_status"),
+      ((modMask .|. shiftMask,      xK_p),              spawnHere "~/.scripts/pauseallmpv"),
+      ((modMask,                    xK_p),              spawnHere "cmus-remote -u"),
+      ((modMask,                    xK_n),              spawnHere "cmus-remote -n"),
+      ((modMask .|. shiftMask,      xK_m),              spawnHere pulsemixer)
     ] ++
     [ ((m .|. modMask, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) ([xK_1 .. xK_9] ++ [xK_0]),
@@ -100,8 +105,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 
 --- LAYOUTS
---myLayout = lessBorders (OtherIndicated) (tiled) ||| noBorders (Full)
-myLayout =  onWorkspace "5" (lessBorders (Screen)Grid) (lessBorders (Screen) tiled) ||| noBorders (Full)
+myLayout =  lessBorders Screen $ onWorkspace "5" Grid tiled ||| noBorders (Full)
     where
         tiled = Tall nmaster delta ratio
         nmaster = 1
@@ -124,5 +128,6 @@ defaults = def {
     keys = myKeys,
     layoutHook = myLayout,
     manageHook = manageSpawn <+> myManageHook,
-    focusFollowsMouse = myFocusFollowsMouse
+    focusFollowsMouse = myFocusFollowsMouse,
+    clickJustFocuses = myClickJustFocuses
 }

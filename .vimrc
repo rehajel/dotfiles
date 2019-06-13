@@ -1,6 +1,8 @@
 set t_Co=256
 syntax on
 map q <Nop>
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
 set noincsearch
 set nohlsearch
 set ignorecase

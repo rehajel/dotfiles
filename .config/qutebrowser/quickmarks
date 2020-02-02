@@ -1,16 +1,30 @@
 eve account management https://docs.google.com/spreadsheets/d/1nX50mf49IQmkhFGPt2595lz6xPUiUjChAZrFEwX0n1M/edit#gid=0
 plexcalc https://www.eve-mogul.com/tools#/plexcalculator/
-mail mail.google.com
+mail https://runbox.com/app/
 fritz http://192.168.0.150
-tube https://www.youtube.com/
 pia https://www.privateinternetaccess.com/
-sabnzbd http://192.168.0.27:9090/
 twitch https://www.twitch.tv/directory/following
 bergfreunde https://www.berg-freunde.at/
 amazon https://www.amazon.de/
-pfsense http://192.168.0.1:8443/status_graph.php?if=lan&sort=in&filter=local&hostipformat=hostname&backgroundupdate=true&invert=false
+pfsense http://pfsense:8443/status_graph.php?if=lan&sort=in&filter=local&hostipformat=hostname&backgroundupdate=true&invert=false
 inoreader https://www.inoreader.com/
 playstation store https://store.playstation.com/de-at/grid/STORE-MSF75508-PLUSINSTANTGAME/1?smcid=pdc%3Ade-at%3Apdc-buy-playstation-store%3Abuttonrow-jetzt-shoppen%3Anull%3A
 couchpotato http://192.168.0.27:5000/login/?next=%2F
-sonarr http://192.168.0.27:8989/
-unifi https://192.168.0.27:8443/manage/account/login?redirect=%2Fmanage
+sonarr http://192.168.0.251:8989/
+unifi https://192.168.0.251:8443/manage/account/login?redirect=%2Fmanage
+youtube https://www.youtube.com/
+ergodox configurator https://configure.ergodox-ez.com/ergodox-ez/layouts/x9pJx/latest/0
+ffxivfc https://aetherscape.eu/
+easybank https://ebanking.easybank.at/InternetBanking/InternetBanking?d=login&svc=EASYBANK&ui=html&lang=de
+cohh https://tstore.cohhilition.com/
+Polar Flow https://flow.polar.com/
+googleAlternatives https://restoreprivacy.com/google-alternatives/
+notes https://zenkit.com/
+EAutoImport https://www.goingelectric.de/wiki/Foerderung-Oesterreich/
+openWB http://192.168.0.47/openWB/web/index.php
+netgear switch http://192.168.0.155/
+instar camera http://192.168.0.49:7777/
+unraid http://unraid/login
+nzbget http://192.168.0.251:6789/#
+radarr http://192.168.0.251:7878/
+ombi http://192.168.0.251:3579/search

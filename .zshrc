@@ -16,16 +16,18 @@ alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || ech
 alias wakeup='/usr/bin/wol 30:9c:23:5e:ed:94'
 alias virtualhere='sudo /home/rehajel/vhusbdx86_64'
 alias rip='/usr/bin/whipper cd rip'
-alias comp='/usr/bin/compton -bc --config ~/.config/compton.conf'
-alias mnt='sudo mount -t cifs //192.168.0.252/bigdata /mnt/fs01 -o iocharset=utf8,uid=rehajel,gid=wheel,credentials=/root/.credentials,sec=ntlmssp,file_mode=0750,dir_mode=0750'
+alias comp='/usr/bin/picom -bc --config ~/.config/picom.conf'
+#alias mnt='sudo mount -t cifs //192.168.0.251/bigdata /mnt/fs01 -o iocharset=utf8,uid=rehajel,gid=wheel,credentials=/root/.credentials,sec=ntlmssp,file_mode=0750,dir_mode=0750'
+alias mnt='sudo mount 192.168.0.251:/mnt/user/bigdata /mnt/fs01'
 alias feh='feh --title "album" -x -Z -. -g 1000x800 -r'
 alias pia='/opt/piavpn/bin/pia-client'
 alias vim='/usr/bin/nvim'
 alias lah='ls -lah --color=always | less -R'
 alias x='exit'
 alias xlog='vim .local/share/xorg/Xorg.0.log'
-alias msync='/usr/bin/unison -auto /mnt/fs01/Music ~/Music'
 alias c='clear'
+alias phonesync='adb-sync --delete /mnt/fs01/Music/ /sdcard/Music'
+alias unraid='ssh root@unraid'
 
 spacman(){
 	unbuffer pacman -Ss "$@" | less -R

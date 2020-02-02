@@ -32,20 +32,15 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-twm &
+# twm &
 xclock -geometry 50x50-1+1 &
-# xterm -geometry 80x50+494+51 &
-# xterm -geometry 80x20+494-0 &
 setxkbmap -layout us -variant altgr-intl
 udiskie &
-# numlockx &
 
 if [ $(xrandr --query | grep ' connected' | wc -l) == 3 ]
 then
-	xrandr --output eDP1 --off --output DP1 --primary --mode 1920x1080 --rate 60 --right-of eDP1 --output HDMI2 --mode 1920x1080 --rate 60 --right-of DP1 --dpi 96
+	xrandr --output eDP-1 --off --output DP-1 --primary --mode 1920x1080 --rate 144 --right-of eDP-1 --output HDMI-2 --mode 1920x1080 --rate 60 --right-of DP-1 --dpi 96
 fi
 
-#exec i3
-#exec qtile
 xsetroot -cursor_name left_ptr
 exec xmonad

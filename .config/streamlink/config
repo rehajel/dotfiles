@@ -1,5 +1,5 @@
 twitch-oauth-token=8n0pputw8ssbg16fe2k4zwrxbz6llw
-player=mpv --cache=10000 
+player=mpv --cache=yes
 player-no-close
 player-passthrough=hls,http,rtmp
 hds-segment-threads 3

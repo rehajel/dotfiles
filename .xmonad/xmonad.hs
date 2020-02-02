@@ -6,12 +6,13 @@ import XMonad.Actions.SpawnOn
 import XMonad.Util.SpawnOnce
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Grid
+import XMonad.Hooks.InsertPosition
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 
 ---- MISC
 myNormalBorderColor = "#5a5a5a"
-myFocusedBorderColor = "#B0BEC5"
+myFocusedBorderColor = "#0fc4b2"
 myBorderWidth = 1
 myModMask = mod4Mask
 myTerminal = "alacritty"
@@ -31,7 +32,8 @@ myManageHook = composeAll [
     --className =? "Bitwarden"        --> doShift "8",
     className =? "Yad"              --> doFloat,
     title     =? "pulsemixer"       --> doFloat,
-    className =? "Thunar"           --> doFloat]
+    className =? "Thunar"           --> doFloat,
+    insertPosition Below Newer]
 
 ---- STARTUP
 myStartupHook = do
@@ -45,13 +47,14 @@ myStartupHook = do
     screenWorkspace 0 >>= flip whenJust (windows . W.view)
     -- Launch Startup Stuff
     spawnOnOnce "9" "discord"
-    spawnOnOnce "8" "bitwarden-bin"
+    spawnOnOnce "8" "bitwarden"
     spawnOnOnce "9" "telegram-desktop"
     spawn "feh --bg-scale ~/Wallpapers/Climbing/MoonLoveComic.png"
-    spawnOnce "compton -bc --config ~/.config/compton.conf"
+    spawnOnce "picom -bc --config ~/.config/picom.conf"
     spawnOnce "unclutter &"
     spawnOnce "dunst &"
     spawnOnce "~/.scripts/battery_notify"
+    spawnOnOnce "4" "mailspring"
 
 ---- KEY CONFIG
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -87,11 +90,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       ((modMask,                    xK_i),              spawnHere "qutebrowser"),
       ((modMask,                    xK_m),              spawn cmus), 
       ((modMask,                    xK_Return),         spawnHere myTerminal),
-      ((modMask,                    xK_e),              spawnOn "7" "thunar"),
+      ((modMask,                    xK_e),              spawnHere "thunar"),
       ((modMask .|. shiftMask,      xK_n),              spawnHere newsboat),
       ((modMask,                    xK_c),              spawnHere "~/.scripts/clock"),
       ((modMask .|. shiftMask,      xK_c),              spawnHere "~/.scripts/popupcalendar --popup"),
       ((modMask,                    xK_s),              spawnHere "~/.scripts/cmus_notify"),
+      ((modMask,                    xK_t),              spawn "~/.scripts/trackball_scroll_toggle"),
       ((modMask,                    xK_b),              spawnHere "~/.scripts/battery_status"),
       ((modMask .|. shiftMask,      xK_p),              spawnHere "~/.scripts/pauseallmpv"),
       ((modMask,                    xK_p),              spawnHere "cmus-remote -u"),

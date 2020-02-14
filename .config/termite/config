@@ -6,7 +6,7 @@ bold_is_bright = true
 #cell_width_scale = 1.0
 clickable_url = true
 dynamic_title = true
-font = SauceCodePro Nerd Font Semibold 12
+font = SauceCodePro Nerd Font 12
 #fullscreen = true
 #icon_name = terminal
 #mouse_autohide = false
@@ -26,7 +26,7 @@ scrollback_lines = 10000
 #cursor_blink = system
 
 # "block", "underline" or "ibeam"
-#cursor_shape = block
+cursor_shape = ibeam
 
 # Hide links that are no longer valid in url select overlay mode
 #filter_unmatched_urls = true

@@ -28,6 +28,7 @@ alias xlog='vim .local/share/xorg/Xorg.0.log'
 alias c='clear'
 alias phonesync='adb-sync --delete /mnt/fs01/Music/ /sdcard/Music'
 alias unraid='ssh root@unraid'
+alias xc='vim ~/.xmonad/xmonad.hs'
 
 spacman(){
 	unbuffer pacman -Ss "$@" | less -R

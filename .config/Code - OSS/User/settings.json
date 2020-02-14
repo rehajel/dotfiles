@@ -1,6 +1,6 @@
 {
     "window.menuBarVisibility": "toggle",
-    "workbench.statusBar.visible": false,
+    "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": false,
     "editor.cursorStyle": "line-thin",
     "editor.cursorBlinking": "solid",
@@ -20,4 +20,10 @@
     "files.autoSave": "onFocusChange",
     "window.zoomLevel": 0.2,
     "window.titleBarStyle": "native",
+    "vim.statusBarColorControl": true,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
 }

@@ -13,6 +13,8 @@ settings:
       w: session-save
       wq: quit --save
       wqa: quit --save
+  backend:
+    global: webengine
   bindings.commands:
     global:
       normal:
@@ -36,13 +38,15 @@ settings:
         xx: set tabs.show always;; later 3000 set tabs.show never
         zd: download-open
   colors.hints.bg:
-    global: rgba(41, 181, 209, 0.57)
+    global: lightgrey
   colors.hints.fg:
     global: black
   colors.hints.match.fg:
     global: grey
   colors.keyhint.bg:
     global: rgba(0, 0, 0, 80%)
+  colors.statusbar.insert.bg:
+    global: darkred
   colors.statusbar.normal.bg:
     global: '#37474F'
   colors.statusbar.normal.fg:
@@ -71,6 +75,8 @@ settings:
     global: '#78909C'
   colors.webpage.bg:
     global: '#dddddd'
+  colors.webpage.prefers_color_scheme_dark:
+    global: true
   content.autoplay:
     global: false
   content.geolocation:
@@ -103,11 +109,19 @@ settings:
   fonts.prompts:
     global: 12pt Source Sans Pro
   fonts.statusbar:
-    global: 10pt monospace
+    global: 10pt default_family
   fonts.tabs:
     global: 12pt Source Sans Pro
   fonts.web.family.cursive:
     global: null
+  hints.border:
+    global: '2px solid #000000'
+  hints.mode:
+    global: letter
+  hints.scatter:
+    global: true
+  hints.uppercase:
+    global: true
   input.insert_mode.auto_load:
     global: true
   input.insert_mode.leave_on_load:

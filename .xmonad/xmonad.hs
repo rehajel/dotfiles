@@ -8,6 +8,7 @@ import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Grid
 import XMonad.Layout.ThreeColumns
 import XMonad.Hooks.InsertPosition
+import XMonad.Hooks.ManageHelpers
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 
@@ -32,9 +33,10 @@ myManageHook = composeAll [
     --title     =? "cmus"             --> doShift "0",
     className =? "discord"          --> doShift "9",
     --className =? "Bitwarden"        --> doShift "8",
-    className =? "Yad"              --> doFloat,
-    title     =? "pulsemixer"       --> doFloat,
-    className =? "Thunar"           --> doFloat,
+    className =? "Yad"              --> doCenterFloat,
+    title     =? "pulsemixer"       --> doCenterFloat,
+    title     =? "neomutt"          --> (doRectFloat $ W.RationalRect 0.32 0.2 0.4 0.7),
+    className =? "Thunar"           --> doCenterFloat,
     insertPosition Above Newer
     ]
 
@@ -70,15 +72,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       ((modMask,                    xK_j),              windows W.focusUp),
       ((modMask,                    xK_k),              windows W.focusDown),
       -- Swap Monitors
-      ((modMask,                    xK_w),              swapNextScreen),
+      --((modMask,                    xK_w),              swapNextScreen),
       -- Focus Monitors
-      ((modMask,                    xK_q),              nextScreen),
+      --((modMask,                    xK_q),              nextScreen),
       -- Move Window to next Screen
-      ((modMask .|. shiftMask,      xK_q),              shiftNextScreen >> nextScreen),
+      --((modMask .|. shiftMask,      xK_q),              shiftNextScreen >> nextScreen),
       -- Move Windows in Layout
       ((modMask .|. shiftMask,      xK_j),              windows W.swapUp),
       ((modMask .|. shiftMask,      xK_k),              windows W.swapDown),
-      ((modMask .|. shiftMask,      xK_space),         windows W.swapMaster),
+      ((modMask .|. shiftMask,      xK_space),          windows W.swapMaster),
       -- Change Size
       ((modMask,                    xK_l),              sendMessage Expand),
       ((modMask,                    xK_h),              sendMessage Shrink),
@@ -92,10 +94,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       ((modMask,                    xK_d),              spawnHere "/usr/bin/rofi -show run"),
       ((modMask,                    xK_i),              spawnHere "firefox"),
       ((modMask,                    xK_m),              spawn cmus), 
+      ((modMask .|. shiftMask,      xK_m),              spawnHere pulsemixer),
+      ((modMask,                    xK_g),              spawnHere neomutt),
       ((modMask,                    xK_Return),         spawnHere myTerminal),
-      ((modMask.|. shiftMask,       xK_e),              spawnHere "thunar"),
-      ((modMask,                    xK_e),              spawnHere neomutt),
-      ((modMask .|. shiftMask,      xK_n),              spawnHere newsboat),
+      ((modMask,                    xK_e),              spawnHere "thunar"),
       ((modMask,                    xK_c),              spawnHere "~/.scripts/clock"),
       ((modMask .|. shiftMask,      xK_c),              spawnHere "~/.scripts/popupcalendar --popup"),
       ((modMask,                    xK_s),              spawnHere "~/.scripts/cmus_notify"),
@@ -103,8 +105,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       ((modMask,                    xK_b),              spawnHere "~/.scripts/battery_status"),
       ((modMask .|. shiftMask,      xK_p),              spawnHere "~/.scripts/pauseallmpv"),
       ((modMask,                    xK_p),              spawnHere "cmus-remote -u"),
-      ((modMask,                    xK_n),              spawnHere "cmus-remote -n"),
-      ((modMask .|. shiftMask,      xK_m),              spawnHere pulsemixer)
+      ((modMask .|. shiftMask,      xK_n),              spawnHere newsboat),
+      ((modMask,                    xK_n),              spawnHere "cmus-remote -n")
     ] ++
     [ ((m .|. modMask, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) ([xK_1 .. xK_9] ++ [xK_0]),

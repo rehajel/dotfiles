@@ -37,3 +37,4 @@ localfolders = ~/Maildir/gmail
 type = Gmail
 remoteuser = rehajel@gmail.com
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+realdelete = yes

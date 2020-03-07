@@ -5,7 +5,7 @@
 #### My Additions:
 set folder = ~/Maildir
 set spoolfile = +runbox/INBOX
-mailboxes +runbox/INBOX +gmail/INBOX +'gmail/[Gmail].All Mail'
+mailboxes +runbox/INBOX +runbox/INBOX.Archiv +runbox/Spam +gmail/INBOX +'gmail/[Gmail].Spam' +'gmail/[Gmail].Bin' +'gmail/[Gmail].All Mail'
 #source ~/.config/neomutt/accounts/gmail
 #source ~/.config/neomutt/accounts/runbox
 folder-hook runbox source ~/.config/neomutt/accounts/runbox

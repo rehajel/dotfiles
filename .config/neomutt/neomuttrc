@@ -5,48 +5,33 @@
 #### My Additions:
 set folder = ~/Maildir
 set spoolfile = +runbox/INBOX
-mailboxes +runbox/INBOX +runbox/INBOX.Archiv +runbox/Spam +gmail/INBOX +'gmail/[Gmail].Spam' +'gmail/[Gmail].Bin' +'gmail/[Gmail].All Mail'
-#source ~/.config/neomutt/accounts/gmail
-#source ~/.config/neomutt/accounts/runbox
+mailboxes +runbox/INBOX +runbox/Drafts +runbox/Sent +runbox/INBOX.Archiv +runbox/Spam +gmail/INBOX +'gmail/[Gmail].Spam' +'gmail/[Gmail].Bin' +'gmail/[Gmail].All Mail'
 folder-hook runbox source ~/.config/neomutt/accounts/runbox
 folder-hook gmail source ~/.config/neomutt/accounts/gmail
 set mbox_type=Maildir
-#macro index 1 '<change-folder> = ~/Maildir/gmail/INBOX/<enter>'
 
 # General
+set sendmail='/user/bin/msmtp'
 set ssl_starttls=yes
-#set help = no #hide help bar
+set help = no
 set sort = threads
 set sort_aux=reverse-last-date-received
-
-# Set Folders
-#set folder=~/Maildir/
-#set record=~/Maildir/Sent
-#set spoolfile=~/Maildir/INBOX
-
-#$mailboxes =INBOX \
-#=Sent \
-#=Drafts \
-#=Spam \
-#=Trash \
-#=INBOX.Archiv
 
 set header_cache=~/Localmail/hcache
 set message_cachedir=~/Localmail/message_cache
 
 # Sidebar
 set sidebar_visible
+set sidebar_width = 30
 bind index,pager \Cj sidebar-next
 bind index,pager \Ck sidebar-prev
 bind index,pager \Co sidebar-open
-set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_format = "%B %* %?N?%N/?%S"
 macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 
 # Sender information
 set realname="Markus Koops"
-# set from="rehajel@rbox.co"
-
 
 # Default list of header fields to weed when displaying.
 # Ignore all lines by default...
@@ -1402,7 +1387,7 @@ attachments   -I message/external-body
 # in the thread tree.
 # 
 # 
-# set edit_headers=no
+set edit_headers=yes
 #
 # Name: edit_headers
 # Type: boolean
@@ -4901,7 +4886,7 @@ set move=no
 # address is not human friendly.
 # 
 # 
-# set reverse_name=no
+set reverse_name=yes
 #
 # Name: reverse_name
 # Type: boolean
@@ -6671,7 +6656,7 @@ set move=no
 # addresses will be qualified.
 # 
 # 
-# set use_envelope_from=no
+set use_envelope_from=yes
 #
 # Name: use_envelope_from
 # Type: boolean

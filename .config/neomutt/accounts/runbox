@@ -2,9 +2,10 @@
 
 #set folder = ~/Maildir/runbox
 set from = "rehajel@rbox.co"
-set sendmail = "msmtp -a rehajel@rbox.co"
+#set sendmail = "msmtp -a rehajel@rbox.co"
 #set mbox = +INBOX
 set spoolfile = +INBOX
 set postponed = +Drafts
 set record = +Sent
 set trash = +Trash
+alternates markus.koops@runbox.com

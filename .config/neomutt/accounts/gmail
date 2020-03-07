@@ -2,7 +2,7 @@
 
 # set folder = ~/Maildir/gmail
 set from = "rehajel@gmail.com"
-set sendmail = "msmtp -a rehajel@gmail.com"
+#set sendmail = "msmtp -a rehajel@gmail.com"
 set spoolfile = +INBOX
 # set mbox = +INBOX
 set postponed = +[Gmail].Drafts

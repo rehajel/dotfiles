@@ -13,6 +13,8 @@ settings:
       w: session-save
       wq: quit --save
       wqa: quit --save
+  auto_save.session:
+    global: true
   backend:
     global: webengine
   bindings.commands:

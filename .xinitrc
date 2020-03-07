@@ -37,9 +37,10 @@ xclock -geometry 50x50-1+1 &
 setxkbmap -layout us -variant altgr-intl
 udiskie &
 
-if [ $(xrandr --query | grep ' connected' | wc -l) == 3 ]
+if [ $(xrandr --query | grep ' connected' | wc -l) == 2 ]
 then
-	xrandr --output eDP-1 --off --output DP-1 --primary --mode 1920x1080 --rate 144 --right-of eDP-1 --output HDMI-2 --mode 1920x1080 --rate 60 --right-of DP-1 --dpi 96
+	#xrandr --output eDP-1 --off --output DP-1 --primary --mode 1920x1080 --rate 144 --right-of eDP-1 --output HDMI-2 --mode 1920x1080 --rate 60 --right-of DP-1 --dpi 96
+	xrandr --output eDP-1 --off --output DP-1 --primary --mode 5120x1440 --rate 60 --right-of eDP-1 --output HDMI-2 --off --dpi 96
 fi
 
 xsetroot -cursor_name left_ptr

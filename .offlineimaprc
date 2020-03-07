@@ -1,0 +1,39 @@
+# Sample config with documentation can be found at /usr/share/offlineimap/offlineimap.conf
+#
+
+[general]
+accounts = runbox,gmail
+maxsyncaccounts = 1
+
+[Account runbox]
+localrepository = RunboxLocal
+remoterepository = RunboxRemote
+autorefresh = 5
+quick = 5
+
+[Repository RunboxLocal]
+type = Maildir
+localfolders = ~/Maildir/runbox
+
+[Repository RunboxRemote]
+type = IMAP
+remotehost = mail.runbox.com
+remoteuser = rehajel@rbox.co
+remoteport = 993
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account gmail]
+localrepository = GmailLocal
+remoterepository = GmailRemote
+autorefresh = 5
+quick = 5
+
+[Repository GmailLocal]
+type = Maildir
+localfolders = ~/Maildir/gmail
+
+[Repository GmailRemote]
+type = Gmail
+remoteuser = rehajel@gmail.com
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt

@@ -1,0 +1,10 @@
+# vim: ft=muttrc
+
+# set folder = ~/Maildir/gmail
+set from = "rehajel@gmail.com"
+set sendmail = "msmtp -a rehajel@gmail.com"
+set spoolfile = +INBOX
+# set mbox = +INBOX
+set postponed = +[Gmail].Drafts
+set trash = +[Gmail].Bin
+set record = +'[Gmail].Sent Mail'

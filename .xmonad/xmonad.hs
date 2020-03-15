@@ -3,10 +3,14 @@ import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
 import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn
+import XMonad.Actions.FloatKeys
 import XMonad.Util.SpawnOnce
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Grid
-import XMonad.Layout.ThreeColumns
+import XMonad.Layout.Spacing
+--import XMonad.Layout.ThreeColumns
+--import XMonad.Layout.MultiColumns
+import XMonad.Layout.ZoomRow
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageHelpers
 import qualified XMonad.StackSet as W
@@ -16,6 +20,7 @@ import qualified Data.Map as M
 myNormalBorderColor = "#5a5a5a"
 myFocusedBorderColor = "#0fc4b2"
 myBorderWidth = 1
+mySpacing = 4
 myModMask = mod4Mask
 myTerminal = "alacritty"
 cmus = myTerminal ++ " --title cmus -e cmus"
@@ -37,7 +42,7 @@ myManageHook = composeAll [
     title     =? "pulsemixer"       --> doCenterFloat,
     title     =? "neomutt"          --> (doRectFloat $ W.RationalRect 0.32 0.2 0.4 0.7),
     className =? "Thunar"           --> doCenterFloat,
-    insertPosition Above Newer
+    insertPosition Below Newer
     ]
 
 ---- STARTUP
@@ -54,12 +59,14 @@ myStartupHook = do
     spawnOnOnce "9" "discord"
     spawnOnOnce "8" "bitwarden"
     spawnOnOnce "9" "telegram-desktop"
+    --spawnOnOnce "9" cmus
     spawn "feh --bg-center ~/Wallpapers/Ultrawide/wallpapers_hatschl/Oriental_2.jpg"
     spawnOnce "picom -bc --config ~/.config/picom.conf"
     spawnOnce "unclutter &"
     spawnOnce "dunst &"
     spawnOnce "~/.scripts/battery_notify"
-    spawnOnOnce "4" "mailspring"
+    spawnOnce "~/.scripts/mailwatch"
+    --spawnOnOnce "4" "mailspring"
 
 ---- KEY CONFIG
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -69,8 +76,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       ((modMask .|. shiftMask,      xK_r),              restart "xmonad" True),
       -- Move Focus
       ((modMask,                    xK_space),          windows W.focusMaster),
-      ((modMask,                    xK_j),              windows W.focusUp),
-      ((modMask,                    xK_k),              windows W.focusDown),
+      ((modMask,                    xK_j),              windows W.focusDown),
+      ((modMask,                    xK_k),              windows W.focusUp),
       -- Swap Monitors
       --((modMask,                    xK_w),              swapNextScreen),
       -- Focus Monitors
@@ -78,12 +85,20 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       -- Move Window to next Screen
       --((modMask .|. shiftMask,      xK_q),              shiftNextScreen >> nextScreen),
       -- Move Windows in Layout
-      ((modMask .|. shiftMask,      xK_j),              windows W.swapUp),
-      ((modMask .|. shiftMask,      xK_k),              windows W.swapDown),
+      ((modMask .|. shiftMask,      xK_j),              windows W.swapDown),
+      ((modMask .|. shiftMask,      xK_k),              windows W.swapUp),
       ((modMask .|. shiftMask,      xK_space),          windows W.swapMaster),
       -- Change Size
-      ((modMask,                    xK_l),              sendMessage Expand),
-      ((modMask,                    xK_h),              sendMessage Shrink),
+      --((modMask,                    xK_l),              sendMessage Expand),
+      --((modMask,                    xK_h),              sendMessage Shrink),
+      -- Change Size in zoomRow Layout
+      ((modMask,                    xK_l),              sendMessage (Zoom 1.15)),
+      ((modMask,                    xK_h),              sendMessage (Zoom 0.90)),
+      -- Floating Stuff
+      ((modMask,                    xK_o),              withFocused $ windows . W.sink),
+      ((modMask .|. shiftMask,      xK_o),              withFocused (keysMoveWindowTo(1200,0)(0,0)) <+> withFocused (keysResizeWindow (-2400,0)(0,0))),
+      ((modMask,                    xK_comma),          withFocused (keysResizeWindow (-200,0)(0,0))),
+      ((modMask,                    xK_period),         withFocused (keysResizeWindow (200,0)(0,0))),
       -- Change Layouts
       ((modMask,                    xK_Tab),            sendMessage NextLayout),
       -- Reset Layouts
@@ -93,6 +108,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       --Spawn Apps
       ((modMask,                    xK_d),              spawnHere "/usr/bin/rofi -show run"),
       ((modMask,                    xK_i),              spawnHere "firefox"),
+      ((modMask .|. shiftMask,      xK_i),              spawnHere "firefox --private-window duckduckgo.com"),
       ((modMask,                    xK_m),              spawn cmus), 
       ((modMask .|. shiftMask,      xK_m),              spawnHere pulsemixer),
       ((modMask,                    xK_g),              spawnHere neomutt),
@@ -115,12 +131,19 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 
 --- LAYOUTS
-myLayout =  lessBorders Screen $ onWorkspace "5" Grid tiled ||| noBorders (Full)
+myLayout = smartSpacing mySpacing $ smartBorders $ onWorkspace "5" Grid zoom ||| noBorders (Full)
     where
-        tiled = ThreeColMid nmaster delta ratio
+        --tiled = ThreeColMid nmaster delta ratio
         nmaster = 1
         delta = 3/100
-        ratio = 1/2
+        ratio = 1/3
+        --multicol = multiCol nrowmaster nrowslaves resizeratio mastersize
+        nrowmaster = [1]
+        nrowslaves = 1
+        resizeratio = 0.01
+        mastersize  = (0.4)
+        zoom = zoomRow
+
 
 ---- MAIN
 main = do

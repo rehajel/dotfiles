@@ -1,10 +1,12 @@
 # vim: ft=muttrc
 
-# set folder = ~/Maildir/gmail
+#set folder = ~/Maildir/gmail
 set from = "rehajel@gmail.com"
-#set sendmail = "msmtp -a rehajel@gmail.com"
-set spoolfile = +INBOX
-# set mbox = +INBOX
-set postponed = +[Gmail].Drafts
-set trash = +[Gmail].Bin
-set record = +'[Gmail].Sent Mail'
+set sendmail = "msmtp -a gmail"
+set spoolfile = +/gmail/INBOX
+set postponed = +/gmail/[Gmail].Drafts
+#set trash = +/gmail/[Gmail].Bin
+unset trash
+#set record = +/gmail/'[Gmail].Sent Mail'
+unset record
+macro index A ":set confirmappend=no delete=yes\n<clear-flag>N<sync-mailbox><delete-message><sync-mailbox>:set confirmappend=yes delete=ask-yes\n<refresh>"

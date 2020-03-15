@@ -14,6 +14,7 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set relativenumber
+set number
 set laststatus=2
 set statusline =\ D:%{getcwd()}	" Working Directory
 set statusline+=\ F:%f		" Current file

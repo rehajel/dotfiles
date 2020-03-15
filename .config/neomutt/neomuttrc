@@ -1,34 +1,49 @@
 #
 # System configuration file for NeoMutt
 #
-
 #### My Additions:
+#set from = 'rehajel@rbox.co'
+set to_chars="       "
+set date_format="%d.%m.%Y %T"
+set index_format="%2C%Z| %D | %-30.30F %s"
+set fcc_attach
+unset mime_forward
+source ~/.config/neomutt/vim-keys
+source ~/.config/neomutt/colors.linux
+set mailcap_path = ~/.config/neomutt/mailcap
+alternative_order text/plain text/html
+auto_view text/html
 set folder = ~/Maildir
-set spoolfile = +runbox/INBOX
-mailboxes +runbox/INBOX +runbox/Drafts +runbox/Sent +runbox/INBOX.Archiv +runbox/Spam +gmail/INBOX +'gmail/[Gmail].Spam' +'gmail/[Gmail].Bin' +'gmail/[Gmail].All Mail'
-folder-hook runbox source ~/.config/neomutt/accounts/runbox
-folder-hook gmail source ~/.config/neomutt/accounts/gmail
+source ~/.config/neomutt/accounts/runbox
+folder-hook runbox/* source ~/.config/neomutt/accounts/runbox
+folder-hook gmail/* source ~/.config/neomutt/accounts/gmail
 set mbox_type=Maildir
 
-# General
-set sendmail='/user/bin/msmtp'
+set fast_reply=yes
+set reply_to
+set include=yes
+set send_charset="utf-8"
 set ssl_starttls=yes
 set help = no
-set sort = threads
-set sort_aux=reverse-last-date-received
-
+set sort = reverse-date
+#set sort = threads
+#set sort_aux = reverse-last-date-received
+set sleep_time = 0
 set header_cache=~/Localmail/hcache
-set message_cachedir=~/Localmail/message_cache
 
 # Sidebar
+# mailboxes +runbox/INBOX +runbox/Drafts +runbox/Sent +runbox/INBOX.Archiv +runbox/Spam +runbox/Trash +gmail/INBOX +'gmail/[Gmail].Sent Mail' +'gmail/[Gmail].Spam' +'gmail/[Gmail].Bin' +'gmail/[Gmail].All Mail' 
 set sidebar_visible
 set sidebar_width = 30
-bind index,pager \Cj sidebar-next
-bind index,pager \Ck sidebar-prev
-bind index,pager \Co sidebar-open
-set sidebar_format = "%B %* %?N?%N/?%S"
-macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
-macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+set sidebar_format = "%B %* %?N?%N?"
+#set sidebar_folder_indent
+set sidebar_divider_char = ' | '
+#set sidebar_short_path
+#set sidebar_indent_string = ' '
+#mailboxes =ALL-INBOXES
+mailboxes =runbox/INBOX =gmail/INBOX
+mailboxes =runbox/Drafts =runbox/Sent =runbox/INBOX.Archiv =runbox/Spam =runbox/Trash
+mailboxes =gmail/[Gmail].Drafts =gmail/'[Gmail].Sent Mail' =gmail/'[Gmail].All Mail' =gmail/[Gmail].Spam =gmail/[Gmail].Bin
 
 # Sender information
 set realname="Markus Koops"
@@ -38,7 +53,7 @@ set realname="Markus Koops"
 ignore *
 
 # ... then allow these through.
-unignore from: subject to cc date x-mailer x-url user-agent
+unignore from: subject to cc date #x-mailer x-url user-agent
 
 # Display the fields in this order
 hdr_order date from to cc subject
@@ -57,9 +72,6 @@ macro index,pager,attach,compose \cb "\
 macro generic,pager <F1> "<shell-escape> less /usr/share/doc/neomutt/manual.txt<Enter>" "show NeoMutt documentation"
 
 # show the incoming mailboxes list (just like "neomutt -y") and back when pressing "y"
-macro index y "<change-folder>?" "show incoming mailboxes list"
-macro pager y "<exit><change-folder>?" "show incoming mailboxes list"
-bind browser y exit
 
 # Handler for gzip compressed mailboxes
 # open-hook   '\.gz$' "gzip --stdout --decompress '%f' >  '%t'"
@@ -1408,7 +1420,7 @@ set edit_headers=yes
 # ignored for interoperability reasons.
 # 
 # 
-set editor="vim +/^$"
+set editor="vim -c 'hi Normal guibg=NONE ctermbg=black' +/^$"
 #
 # Name: editor
 # Type: command
@@ -2424,7 +2436,7 @@ set editor="vim +/^$"
 # is slow.
 # 
 # 
-# set imap_peek=yes
+# set imap_peek=no
 #
 # Name: imap_peek
 # Type: boolean

@@ -2,10 +2,11 @@
 
 #set folder = ~/Maildir/runbox
 set from = "rehajel@rbox.co"
-#set sendmail = "msmtp -a rehajel@rbox.co"
-#set mbox = +INBOX
-set spoolfile = +INBOX
-set postponed = +Drafts
-set record = +Sent
-set trash = +Trash
+set sendmail = "msmtp -a runbox"
+set spoolfile = +/runbox/INBOX
+set postponed = +/runbox/Drafts
+set record = +/runbox/Sent
+set trash = +/runbox/Trash
 alternates markus.koops@runbox.com
+
+macro index A ":set confirmappend=no delete=yes\n<save-message>+/runbox/INBOX.Archiv\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n<refresh>"

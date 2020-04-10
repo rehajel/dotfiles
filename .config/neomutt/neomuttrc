@@ -17,8 +17,11 @@ set folder = ~/Maildir
 source ~/.config/neomutt/accounts/runbox
 folder-hook runbox/* source ~/.config/neomutt/accounts/runbox
 folder-hook gmail/* source ~/.config/neomutt/accounts/gmail
+folder-hook outlook/* source ~/.config/neomutt/accounts/outlook
+
 set mbox_type=Maildir
 
+set resolve=no
 set fast_reply=yes
 set reply_to
 set include=yes
@@ -41,9 +44,10 @@ set sidebar_divider_char = ' | '
 #set sidebar_short_path
 #set sidebar_indent_string = ' '
 #mailboxes =ALL-INBOXES
-mailboxes =runbox/INBOX =gmail/INBOX
+mailboxes =runbox/INBOX =gmail/INBOX =outlook/Inbox
 mailboxes =runbox/Drafts =runbox/Sent =runbox/INBOX.Archiv =runbox/Spam =runbox/Trash
 mailboxes =gmail/[Gmail].Drafts =gmail/'[Gmail].Sent Mail' =gmail/'[Gmail].All Mail' =gmail/[Gmail].Spam =gmail/[Gmail].Bin
+mailboxes =outlook/Drafts =outlook/Sent =outlook/Archive =outlook/Junk =outlook/Trash
 
 # Sender information
 set realname="Markus Koops"

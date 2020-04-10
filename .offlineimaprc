@@ -2,7 +2,7 @@
 #
 
 [general]
-accounts = runbox,gmail
+accounts = runbox,gmail,outlook
 maxsyncaccounts = 1
 
 [Account runbox]
@@ -38,3 +38,21 @@ type = Gmail
 remoteuser = rehajel@gmail.com
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 realdelete = no
+
+[Account outlook]
+localrepository = OutlookLocal
+remoterepository = OutlookRemote
+autorefresh = 1
+quick = 5
+
+[Repository OutlookLocal]
+type = Maildir
+localfolders = ~/Maildir/outlook
+
+[Repository OutlookRemote]
+type = IMAP
+remotehost = outlook.office365.com
+remoteuser = markus.koops@outlook.com
+remoteport = 993
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt

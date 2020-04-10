@@ -12,7 +12,8 @@ color info color110 color235
 
 auto-reload yes
 reload-threads 10
-browser "qutebrowser %u"
+browser "firefox %u"
+player "mpv"
 feed-sort-order firsttag
 feedlist-title-format "%N  Your Feeds"
 feedlist-format "%4U %t"
@@ -34,5 +35,7 @@ bind-key K home
 bind-key i mark-all-above-as-read
 bind-key n toggle-article-read
 bind-key N mark-feed-read
+bind-key o open-in-browser-and-mark-read
+macro o set browser "mpv %u"; open-in-browser-and-mark-read ; set browser "firefox %u"
 
 unbind-key C

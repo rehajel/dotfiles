@@ -1,5 +1,6 @@
 import XMonad
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn
@@ -20,13 +21,15 @@ import qualified Data.Map as M
 myNormalBorderColor = "#5a5a5a"
 myFocusedBorderColor = "#0fc4b2"
 myBorderWidth = 1
-mySpacing = 4
+mySpacingWidth = 4
+mySpacing = spacingRaw True (Border 4 4 4 4) True (Border 0 0 mySpacingWidth 0) True
 myModMask = mod4Mask
 myTerminal = "alacritty"
 cmus = myTerminal ++ " --title cmus -e cmus"
 neomutt = myTerminal ++ " --title neomutt -e neomutt"
 newsboat = myTerminal ++ " --title newsboat -e newsboat"
 pulsemixer = myTerminal ++ " --title pulsemixer -e pulsemixer"
+ranger = myTerminal ++ " --title ranger -e ranger"
 myLauncher = "/usr/bin/rofi -show run"
 myWorkspaces = ["1","2","3","4","5","6","7","8","9","0"]
 myFocusFollowsMouse = False
@@ -36,13 +39,14 @@ myClickJustFocuses = False
 myManageHook = composeAll [
     --className =? "qutebrowser"      --> doShift "2",
     --title     =? "cmus"             --> doShift "0",
-    className =? "discord"          --> doShift "9",
+    --className =? "discord"          --> doShift "9",
     --className =? "Bitwarden"        --> doShift "8",
     className =? "Yad"              --> doCenterFloat,
     title     =? "pulsemixer"       --> doCenterFloat,
     title     =? "neomutt"          --> (doRectFloat $ W.RationalRect 0.32 0.2 0.4 0.7),
-    className =? "Thunar"           --> doCenterFloat,
-    insertPosition Below Newer
+    title     =? "ranger"           --> (doRectFloat $ W.RationalRect 0.32 0.2 0.4 0.7),
+    className =? "Thunar"           --> doCenterFloat
+    --insertPosition Below Newer
     ]
 
 ---- STARTUP
@@ -57,8 +61,8 @@ myStartupHook = do
     --screenWorkspace 0 >>= flip whenJust (windows . W.view)
     -- Launch Startup Stuff
     spawnOnOnce "9" "discord"
-    spawnOnOnce "8" "bitwarden"
-    spawnOnOnce "9" "telegram-desktop"
+    --spawnOnOnce "8" "bitwarden"
+    --spawnOnOnce "9" "telegram-desktop"
     --spawnOnOnce "9" cmus
     spawn "feh --bg-center ~/Wallpapers/Ultrawide/wallpapers_hatschl/Oriental_2.jpg"
     spawnOnce "picom -bc --config ~/.config/picom.conf"
@@ -99,6 +103,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       ((modMask .|. shiftMask,      xK_o),              withFocused (keysMoveWindowTo(1200,0)(0,0)) <+> withFocused (keysResizeWindow (-2400,0)(0,0))),
       ((modMask,                    xK_comma),          withFocused (keysResizeWindow (-200,0)(0,0))),
       ((modMask,                    xK_period),         withFocused (keysResizeWindow (200,0)(0,0))),
+      ((modMask .|. shiftMask,      xK_h),              withFocused (keysMoveWindow (-100,0))),
+      ((modMask .|. shiftMask,      xK_l),              withFocused (keysMoveWindow (100,0))),
       -- Change Layouts
       ((modMask,                    xK_Tab),            sendMessage NextLayout),
       -- Reset Layouts
@@ -112,8 +118,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       ((modMask,                    xK_m),              spawn cmus), 
       ((modMask .|. shiftMask,      xK_m),              spawnHere pulsemixer),
       ((modMask,                    xK_g),              spawnHere neomutt),
+      ((modMask,                    xK_e),              spawnHere ranger),
       ((modMask,                    xK_Return),         spawnHere myTerminal),
-      ((modMask,                    xK_e),              spawnHere "thunar"),
+      --((modMask,                    xK_e),              spawnHere "thunar"),
       ((modMask,                    xK_c),              spawnHere "~/.scripts/clock"),
       ((modMask .|. shiftMask,      xK_c),              spawnHere "~/.scripts/popupcalendar --popup"),
       ((modMask,                    xK_s),              spawnHere "~/.scripts/cmus_notify"),
@@ -131,7 +138,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 
 --- LAYOUTS
-myLayout = smartSpacing mySpacing $ smartBorders $ onWorkspace "5" Grid zoom ||| noBorders (Full)
+myLayout = mySpacing $ smartBorders $ onWorkspace "5" Grid zoom ||| noBorders (Full)
     where
         --tiled = ThreeColMid nmaster delta ratio
         nmaster = 1
@@ -147,7 +154,7 @@ myLayout = smartSpacing mySpacing $ smartBorders $ onWorkspace "5" Grid zoom |||
 
 ---- MAIN
 main = do
-    xmonad $ defaults {
+    xmonad $ ewmh defaults {
         startupHook = myStartupHook
     }
 

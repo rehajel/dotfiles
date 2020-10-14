@@ -1,0 +1,13 @@
+theme:
+  active: LightCyan
+  banner: LightCyan
+  error_border: Red
+  error_text: LightRed
+  hint: Yellow
+  hovered: Blue
+  inactive: Gray
+  playbar_background: Black
+  playbar_progress: LightCyan
+  playbar_text: White
+  selected: LightCyan
+  text: "255, 255, 255"

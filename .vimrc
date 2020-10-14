@@ -21,7 +21,6 @@ set statusline+=\ S:%m		" Files's modification state
 set statusline+=\ R:%r		" File's permissions
 set statusline+=\ T:%y		" File's language type
 set statusline+=\ L:%l/%L	" Current line vs lines number
-execute pathogen#infect()
 
 let g:lightline = {
 	\ 'colorscheme':'wombat',

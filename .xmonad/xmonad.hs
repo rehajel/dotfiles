@@ -29,6 +29,7 @@ cmus = myTerminal ++ " --title cmus -e cmus"
 neomutt = myTerminal ++ " --title neomutt -e neomutt"
 newsboat = myTerminal ++ " --title newsboat -e newsboat"
 pulsemixer = myTerminal ++ " --title pulsemixer -e pulsemixer"
+calculator = myTerminal ++ " --title calc -e calc"
 ranger = myTerminal ++ " --title ranger -e ranger"
 myLauncher = "/usr/bin/rofi -show run"
 myWorkspaces = ["1","2","3","4","5","6","7","8","9","0"]
@@ -43,6 +44,7 @@ myManageHook = composeAll [
     --className =? "Bitwarden"        --> doShift "8",
     className =? "Yad"              --> doCenterFloat,
     title     =? "pulsemixer"       --> doCenterFloat,
+    title     =? "calc"             --> doCenterFloat,
     title     =? "neomutt"          --> (doRectFloat $ W.RationalRect 0.32 0.2 0.4 0.7),
     title     =? "ranger"           --> (doRectFloat $ W.RationalRect 0.32 0.2 0.4 0.7),
     className =? "Thunar"           --> doCenterFloat
@@ -60,7 +62,7 @@ myStartupHook = do
     -- Focus the first screen again.
     --screenWorkspace 0 >>= flip whenJust (windows . W.view)
     -- Launch Startup Stuff
-    spawnOnOnce "9" "discord"
+    --spawnOnOnce "9" "discord"
     --spawnOnOnce "8" "bitwarden"
     --spawnOnOnce "9" "telegram-desktop"
     --spawnOnOnce "9" cmus
@@ -70,6 +72,7 @@ myStartupHook = do
     spawnOnce "dunst &"
     spawnOnce "~/.scripts/battery_notify"
     spawnOnce "~/.scripts/mailwatch"
+    spawnOnce "clipster -d"
     --spawnOnOnce "4" "mailspring"
 
 ---- KEY CONFIG
@@ -116,6 +119,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       ((modMask,                    xK_i),              spawnHere "firefox"),
       ((modMask .|. shiftMask,      xK_i),              spawnHere "firefox --private-window duckduckgo.com"),
       ((modMask,                    xK_m),              spawn cmus), 
+      ((modMask,                    xK_u),              spawn calculator), 
       ((modMask .|. shiftMask,      xK_m),              spawnHere pulsemixer),
       ((modMask,                    xK_g),              spawnHere neomutt),
       ((modMask,                    xK_e),              spawnHere ranger),
@@ -123,6 +127,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       --((modMask,                    xK_e),              spawnHere "thunar"),
       ((modMask,                    xK_c),              spawnHere "~/.scripts/clock"),
       ((modMask .|. shiftMask,      xK_c),              spawnHere "~/.scripts/popupcalendar --popup"),
+      ((modMask,                    xK_v),              spawnHere "roficlip"),
       ((modMask,                    xK_s),              spawnHere "~/.scripts/cmus_notify"),
       ((modMask,                    xK_t),              spawn "~/.scripts/trackball_scroll_toggle"),
       ((modMask,                    xK_b),              spawnHere "~/.scripts/battery_status"),

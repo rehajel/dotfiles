@@ -2,10 +2,12 @@
 # System configuration file for NeoMutt
 #
 #### My Additions:
-#set from = 'rehajel@rbox.co'
 set to_chars="       "
-set date_format="%d.%m.%Y %T"
-set index_format="%2C%Z| %D | %-30.30F %s"
+#set date_format="%d.%m.%Y %T"
+# Received Time:
+set index_format="%2C%Z| %(%d.%m.%Y %H:%M) | %-30.30F %s"
+# Local Time of Message:
+#set index_format="%2C%Z| %[%d.%m.%Y %H:%M] | %-30.30F %s"
 set fcc_attach
 unset mime_forward
 source ~/.config/neomutt/vim-keys
@@ -28,7 +30,7 @@ set include=yes
 set send_charset="utf-8"
 set ssl_starttls=yes
 set help = no
-set sort = reverse-date
+set sort = reverse-date-received
 #set sort = threads
 #set sort_aux = reverse-last-date-received
 set sleep_time = 0
@@ -39,14 +41,19 @@ set header_cache=~/Localmail/hcache
 set sidebar_visible
 set sidebar_width = 30
 set sidebar_format = "%B %* %?N?%N?"
+#set sidebar_component_depth = 1
 #set sidebar_folder_indent
 set sidebar_divider_char = ' | '
+#set sidebar_delim_chars = "/"
 #set sidebar_short_path
-#set sidebar_indent_string = ' '
+#set sidebar_indent_string = '  '
 #mailboxes =ALL-INBOXES
-mailboxes =runbox/INBOX =gmail/INBOX =outlook/Inbox
+#mailboxes =runbox
+mailboxes =runbox/INBOX #=gmail/INBOX =outlook/Inbox
 mailboxes =runbox/Drafts =runbox/Sent =runbox/INBOX.Archiv =runbox/Spam =runbox/Trash
+mailboxes =gmail/INBOX
 mailboxes =gmail/[Gmail].Drafts =gmail/'[Gmail].Sent Mail' =gmail/'[Gmail].All Mail' =gmail/[Gmail].Spam =gmail/[Gmail].Bin
+mailboxes =outlook/Inbox
 mailboxes =outlook/Drafts =outlook/Sent =outlook/Archive =outlook/Junk =outlook/Trash
 
 # Sender information
@@ -1424,7 +1431,7 @@ set edit_headers=yes
 # ignored for interoperability reasons.
 # 
 # 
-set editor="vim -c 'hi Normal guibg=NONE ctermbg=black' +/^$"
+set editor="nvim -c 'hi Normal guibg=NONE ctermbg=black' +/^$"
 #
 # Name: editor
 # Type: command

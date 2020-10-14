@@ -1,4 +1,6 @@
 urls-source "inoreader"
+inoreader-app-id  999999565
+inoreader-app-key E00S0HXIOAAfZBcDN1l1Q_w8DzCBt_I_
 inoreader-passwordfile "/home/rehajel/.newsboat/inoreader.login"
 inoreader-login "rehajel"
 inoreader-min-items 100
@@ -34,7 +36,7 @@ bind-key J end
 bind-key K home
 bind-key i mark-all-above-as-read
 bind-key n toggle-article-read
-bind-key N mark-feed-read
+bind-key N toggle-article-read
 bind-key o open-in-browser-and-mark-read
 macro o set browser "mpv %u"; open-in-browser-and-mark-read ; set browser "firefox %u"
 

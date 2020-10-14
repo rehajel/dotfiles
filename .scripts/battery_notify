@@ -10,7 +10,8 @@ do
         battery_level=`acpi -b | sed 's/.*[dg], //g;s/\%,.*//g'`
         [ $battery_level -le $critical_level ] && \
         notify-send -u critical -t 15000 \
-        "Battery level is low!" "Only $battery_level% of the charge remains."
+        "Battery level is low!" "Only $battery_level% of the charge remains." && \
+        paplay /usr/share/sounds/freedesktop/stereo/suspend-error.oga
     fi
     sleep $interval
 done

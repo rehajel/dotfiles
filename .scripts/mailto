@@ -1,0 +1,5 @@
+#!/usr/bin/perl
+$_ = $ARGV[0];
+chomp;
+s/^mailto://;
+`alacritty --title neomutt -e neomutt $_`

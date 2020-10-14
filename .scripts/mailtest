@@ -1,0 +1,7 @@
+#!/bin/bash
+        fpath=/home/rehajel/Maildir/runbox/INBOX/cur/
+        file=1583557566_0.16623.archbook,U=273,FMD5=7e33429f656f1e6e9d79b29c3f82c57e:2,S
+        from=$( grep "From: T" $fpath/$file | tr -d '<>' )
+        #subject=$( grep "Subject: " $fpath/$file )
+        #from="From: Tina Speth tinia" 
+        notify-send --app-name=mynotif " " "<span size='x-large'>New Mail!</span><span size='medium'>\n$from\n$subject</span>"

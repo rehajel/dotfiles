@@ -1,0 +1,11 @@
+#!/bin/bash
+
+inotifywait -m ~/Maildir/*/INBOX/new -e create -e moved_to |
+    while read fpath action file; do
+        from=$( grep "From: " $fpath/$file | cut -f1 -d"<" )
+        subject=$( grep "Subject: " $fpath/$file )
+        
+        #~/.scripts/mailnotify
+        notify-send --app-name=mynotif " " "<span size='x-large'>New Mail!</span><span size='medium'>\n$from\n$subject</span>"
+        paplay /usr/share/sounds/freedesktop/stereo/complete.oga
+    done

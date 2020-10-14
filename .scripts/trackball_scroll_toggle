@@ -1,0 +1,10 @@
+#!/bin/bash
+
+state=$( xinput list-props "Clearly Superior Technologies. CST Laser Trackball" | grep 312 | cut -f3 )
+
+if [ $state -eq 2 ] 
+then
+    xinput --set-prop "Clearly Superior Technologies. CST Laser Trackball" "libinput Button Scrolling Button" 3
+else
+    xinput --set-prop "Clearly Superior Technologies. CST Laser Trackball" "libinput Button Scrolling Button" 2
+fi

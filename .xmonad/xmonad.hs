@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.FadeInactive
 import XMonad.Layout.NoBorders
 import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn
@@ -20,7 +21,7 @@ import qualified Data.Map as M
 ---- MISC
 myNormalBorderColor = "#5a5a5a"
 myFocusedBorderColor = "#0fc4b2"
-myBorderWidth = 1
+myBorderWidth = 0
 mySpacingWidth = 4
 mySpacing = spacingRaw True (Border 4 4 4 4) True (Border 0 0 mySpacingWidth 0) True
 myModMask = mod4Mask
@@ -31,6 +32,7 @@ newsboat = myTerminal ++ " --title newsboat -e newsboat"
 pulsemixer = myTerminal ++ " --title pulsemixer -e pulsemixer"
 calculator = myTerminal ++ " --title calc -e calc"
 ranger = myTerminal ++ " --title ranger -e ranger"
+screenshot = "flameshot gui"
 myLauncher = "/usr/bin/rofi -show run"
 myWorkspaces = ["1","2","3","4","5","6","7","8","9","0"]
 myFocusFollowsMouse = False
@@ -124,7 +126,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       ((modMask,                    xK_g),              spawnHere neomutt),
       ((modMask,                    xK_e),              spawnHere ranger),
       ((modMask,                    xK_Return),         spawnHere myTerminal),
-      --((modMask,                    xK_e),              spawnHere "thunar"),
+      ((modMask,                    xK_x),              spawnHere screenshot),
       ((modMask,                    xK_c),              spawnHere "~/.scripts/clock"),
       ((modMask .|. shiftMask,      xK_c),              spawnHere "~/.scripts/popupcalendar --popup"),
       ((modMask,                    xK_v),              spawnHere "roficlip"),
@@ -156,11 +158,15 @@ myLayout = mySpacing $ smartBorders $ onWorkspace "5" Grid zoom ||| noBorders (F
         mastersize  = (0.4)
         zoom = zoomRow
 
-
+--- logHook (Transparancy for inactive windows)
+myLogHook :: X ()
+myLogHook = fadeInactiveLogHook fadeAmount
+        where fadeAmount = 0.6
 ---- MAIN
 main = do
     xmonad $ ewmh defaults {
-        startupHook = myStartupHook
+        startupHook = myStartupHook,
+        logHook = myLogHook
     }
 
 defaults = def {

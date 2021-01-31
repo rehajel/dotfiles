@@ -28,12 +28,13 @@ alias c='clear'
 alias phonesync='adb-sync --delete /mnt/fs01/Music/ /sdcard/Music'
 alias unraid='ssh root@unraid'
 alias xc='vim ~/.xmonad/xmonad.hs'
+alias yay='echo "its PARU dummy"'
 
 spacman(){
 	unbuffer pacman -Ss "$@" | less -R
 }
-syay(){
-	unbuffer yay -Ss "$@" | less -R
+sparu(){
+	unbuffer paru -Ss "$@" | less -R
 }
 
 bindkey -v

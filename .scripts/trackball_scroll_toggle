@@ -1,6 +1,6 @@
 #!/bin/bash
 
-state=$( xinput list-props "Clearly Superior Technologies. CST Laser Trackball" | grep 312 | cut -f3 )
+state=$( xinput list-props "Clearly Superior Technologies. CST Laser Trackball" | grep "libinput Button Scrolling Button (" | cut -f3 )
 
 if [ $state -eq 2 ] 
 then

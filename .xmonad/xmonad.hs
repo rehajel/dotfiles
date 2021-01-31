@@ -23,6 +23,7 @@ myNormalBorderColor = "#5a5a5a"
 myFocusedBorderColor = "#0fc4b2"
 myBorderWidth = 0
 mySpacingWidth = 4
+myfadeAmount = 0.9
 mySpacing = spacingRaw True (Border 4 4 4 4) True (Border 0 0 mySpacingWidth 0) True
 myModMask = mod4Mask
 myTerminal = "alacritty"
@@ -161,7 +162,7 @@ myLayout = mySpacing $ smartBorders $ onWorkspace "5" Grid zoom ||| noBorders (F
 --- logHook (Transparancy for inactive windows)
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
-        where fadeAmount = 0.6
+        where fadeAmount = myfadeAmount 
 ---- MAIN
 main = do
     xmonad $ ewmh defaults {

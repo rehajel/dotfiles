@@ -4,6 +4,8 @@
 #### My Additions:
 set to_chars="       "
 #set date_format="%d.%m.%Y %T"
+#Use abook when composing mails
+set query_command="abook --mutt-query '%s'"
 # Received Time:
 set index_format="%2C%Z| %(%d.%m.%Y %H:%M) | %-30.30F %s"
 # Local Time of Message:
@@ -13,7 +15,7 @@ unset mime_forward
 source ~/.config/neomutt/vim-keys
 source ~/.config/neomutt/colors.linux
 set mailcap_path = ~/.config/neomutt/mailcap
-alternative_order text/plain text/html
+alternative_order text/plain text/enriched text/html
 auto_view text/html
 set folder = ~/Maildir
 source ~/.config/neomutt/accounts/runbox

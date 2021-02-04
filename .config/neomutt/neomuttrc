@@ -4,8 +4,25 @@
 #### My Additions:
 set to_chars="       "
 #set date_format="%d.%m.%Y %T"
-#Use abook when composing mails
-set query_command="abook --mutt-query '%s'"
+
+unset signature
+
+## notmuch integration
+
+# points to the notmuch directory
+set nm_default_url = "notmuch://$HOME/Maildir
+# Binding for notmuch search
+bind index // vfolder-from-query
+
+## abook integration
+
+# Use abook when composing mails
+set query_command= "abook --mutt-query '%s'"
+# Add current sender to address book
+macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+# Auto-complete email addresses by pushing tab
+bind editor <Tab> complete-query
+
 # Received Time:
 set index_format="%2C%Z| %(%d.%m.%Y %H:%M) | %-30.30F %s"
 # Local Time of Message:

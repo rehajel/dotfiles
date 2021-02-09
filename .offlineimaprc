@@ -10,6 +10,7 @@ localrepository = RunboxLocal
 remoterepository = RunboxRemote
 autorefresh = 1
 quick = 5
+postsynchook = notmuch new
 
 [Repository RunboxLocal]
 type = Maildir
@@ -28,6 +29,7 @@ localrepository = GmailLocal
 remoterepository = GmailRemote
 autorefresh = 1
 quick = 5
+postsynchook = notmuch new
 
 [Repository GmailLocal]
 type = Maildir
@@ -44,6 +46,7 @@ localrepository = OutlookLocal
 remoterepository = OutlookRemote
 autorefresh = 1
 quick = 5
+postsynchook = notmuch new
 
 [Repository OutlookLocal]
 type = Maildir

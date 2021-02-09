@@ -6,13 +6,17 @@ set to_chars="       "
 #set date_format="%d.%m.%Y %T"
 
 unset signature
+#set from="rehajel@rbox.co"
+#alternates "rehajel@rbox.co|rehajel@gmail.com|markus.koops@outlook.com|markus.koops@runbox.com"
+set reverse_name=yes
+set reply_with_xorig=yes
 
 ## notmuch integration
 
 # points to the notmuch directory
 set nm_default_url = "notmuch://$HOME/Maildir
 # Binding for notmuch search
-bind index // vfolder-from-query
+bind index / vfolder-from-query
 
 ## abook integration
 
@@ -36,9 +40,10 @@ alternative_order text/plain text/enriched text/html
 auto_view text/html
 set folder = ~/Maildir
 source ~/.config/neomutt/accounts/runbox
-folder-hook runbox/* source ~/.config/neomutt/accounts/runbox
-folder-hook gmail/* source ~/.config/neomutt/accounts/gmail
+#set virtual_spoolfile
 folder-hook outlook/* source ~/.config/neomutt/accounts/outlook
+folder-hook gmail/* source ~/.config/neomutt/accounts/gmail
+folder-hook runbox/* source ~/.config/neomutt/accounts/runbox
 
 set mbox_type=Maildir
 
@@ -68,12 +73,13 @@ set sidebar_divider_char = ' | '
 #set sidebar_indent_string = '  '
 #mailboxes =ALL-INBOXES
 #mailboxes =runbox
+#virtual-mailboxes "Unified Inbox" "notmuch://?query=folder:gmail/INBOX OR folder:outlook/Inbox OR folder:runbox/INBOX"
 mailboxes =runbox/INBOX #=gmail/INBOX =outlook/Inbox
-mailboxes =runbox/Drafts =runbox/Sent =runbox/INBOX.Archiv =runbox/Spam =runbox/Trash
+#mailboxes =runbox/Drafts =runbox/Sent =runbox/INBOX.Archiv =runbox/Spam =runbox/Trash
 mailboxes =gmail/INBOX
-mailboxes =gmail/[Gmail].Drafts =gmail/'[Gmail].Sent Mail' =gmail/'[Gmail].All Mail' =gmail/[Gmail].Spam =gmail/[Gmail].Bin
+#mailboxes =gmail/[Gmail].Drafts =gmail/'[Gmail].Sent Mail' =gmail/'[Gmail].All Mail' =gmail/[Gmail].Spam =gmail/[Gmail].Bin
 mailboxes =outlook/Inbox
-mailboxes =outlook/Drafts =outlook/Sent =outlook/Archive =outlook/Junk =outlook/Trash
+#mailboxes =outlook/Drafts =outlook/Sent =outlook/Archive =outlook/Junk =outlook/Trash
 
 # Sender information
 set realname="Markus Koops"
@@ -87,9 +93,6 @@ unignore from: subject to cc date #x-mailer x-url user-agent
 
 # Display the fields in this order
 hdr_order date from to cc subject
-
-# imitate the old search-body function
-macro index \eb "<search>~b " "search in message bodies"
 
 # simulate the old url menu
 macro index,pager,attach,compose \cb "\
@@ -4928,7 +4931,7 @@ set move=no
 # address is not human friendly.
 # 
 # 
-set reverse_name=yes
+#set reverse_name=yes
 #
 # Name: reverse_name
 # Type: boolean

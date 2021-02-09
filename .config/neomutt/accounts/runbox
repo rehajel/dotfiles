@@ -7,6 +7,6 @@ set spoolfile = +/runbox/INBOX
 set postponed = +/runbox/Drafts
 set record = +/runbox/Sent
 set trash = +/runbox/Trash
-alternates markus.koops@runbox.com
+alternates "markus.koops@runbox.com"
 
 macro index A ":set confirmappend=no delete=yes\n<save-message>+/runbox/INBOX.Archiv\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n<refresh>"

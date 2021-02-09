@@ -1,0 +1,23 @@
+# abook addressbook file
+
+[format]
+program=abook
+version=0.6.1
+
+
+[0]
+name=Batz
+email=harulovesharu@gmail.com,mail@sabinekoops.com
+
+[1]
+name=Jos
+email=phil.witsch@gmail.com
+
+[2]
+name=Jogl
+email=jakobwieser@posteo.net
+
+[3]
+name=Mum
+email=monigst@outlook.com
+

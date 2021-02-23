@@ -1,10 +1,10 @@
 # vim: ft=muttrc
 
-set from = "markus.koops@outlook.com"
+#set from = "markus.koops@outlook.com"
 set sendmail = "msmtp -a outlook"
 set spoolfile = +/outlook/Inbox
 set postponed = +/outlook/Drafts
 set record = +/outlook/Sent
 set trash = +/outlook/Trash
 
-macro index A ":set confirmappend=no delete=yes\n<save-message>+/outlook/Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n<refresh>"
+#macro index A ":set confirmappend=no delete=yes\n<save-message>+/outlook/Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n<refresh>"

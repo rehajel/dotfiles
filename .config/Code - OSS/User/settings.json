@@ -26,4 +26,5 @@
         "statusBar.noFolderBackground": "#005f5f",
         "statusBar.debuggingBackground": "#005f5f"
     },
+    "workbench.startupEditor": "newUntitledFile",
 }

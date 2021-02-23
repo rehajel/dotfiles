@@ -40,6 +40,7 @@ type = Gmail
 remoteuser = rehajel@gmail.com
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 realdelete = no
+folderfilter = lambda folder: not re.search('(All Mail)', folder)
 
 [Account outlook]
 localrepository = OutlookLocal

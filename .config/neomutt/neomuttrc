@@ -6,8 +6,8 @@ set to_chars="       "
 #set date_format="%d.%m.%Y %T"
 
 unset signature
-#set from="rehajel@rbox.co"
-#alternates "rehajel@rbox.co|rehajel@gmail.com|markus.koops@outlook.com|markus.koops@runbox.com"
+set from="rehajel@rbox.co"
+alternates "rehajel@rbox.co|rehajel@gmail.com|markus.koops@outlook.com|markus.koops@runbox.com"
 set reverse_name=yes
 set reply_with_xorig=yes
 
@@ -15,17 +15,11 @@ set reply_with_xorig=yes
 
 # points to the notmuch directory
 set nm_default_url = "notmuch://$HOME/Maildir
-# Binding for notmuch search
-bind index / vfolder-from-query
 
 ## abook integration
 
 # Use abook when composing mails
 set query_command= "abook --mutt-query '%s'"
-# Add current sender to address book
-macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
-# Auto-complete email addresses by pushing tab
-bind editor <Tab> complete-query
 
 # Received Time:
 set index_format="%2C%Z| %(%d.%m.%Y %H:%M) | %-30.30F %s"
@@ -39,11 +33,30 @@ set mailcap_path = ~/.config/neomutt/mailcap
 alternative_order text/plain text/enriched text/html
 auto_view text/html
 set folder = ~/Maildir
-source ~/.config/neomutt/accounts/runbox
-#set virtual_spoolfile
-folder-hook outlook/* source ~/.config/neomutt/accounts/outlook
-folder-hook gmail/* source ~/.config/neomutt/accounts/gmail
-folder-hook runbox/* source ~/.config/neomutt/accounts/runbox
+#source ~/.config/neomutt/accounts/runbox
+set virtual_spoolfile
+#set sendmail = "msmtp -a runbox"
+set sendmail = "/usr/bin/msmtp"
+set postponed = +/runbox/Drafts
+#set record = +/runbox/Sent
+unset record
+set trash = +/local/Trash
+set confirmappend = no
+#folder-hook outlook/* source ~/.config/neomutt/accounts/outlook
+#folder-hook gmail/* source ~/.config/neomutt/accounts/gmail
+#folder-hook runbox/* source ~/.config/neomutt/accounts/runbox
+send2-hook '~e markus.koops@outlook.com' "set sendmail = '/usr/bin/msmtp -a outlook'"
+send2-hook '~e rehajel@gmail.com' "set sendmail = '/usr/bin/msmtp -a gmail'"
+send2-hook '~e rehajel@runbox.co' "set sendmail = '/usr/bin/msmtp -a runbox'"
+send2-hook '~e markus.koops@runbox.com' "set sendmail = '/usr/bin/msmtp -a runbox'"
+fcc-hook '~f @rbox.co' +/runbox/Sent
+fcc-hook '~f @runbox.com' +/runbox/Sent
+fcc-hook '~f @outlook.com' +/outlook/Sent
+save-hook '~C @outlook.com' +/outlook/Archive
+save-hook '~C @rbox.co' +/runbox/INBOX.Archiv
+save-hook '~C @runbox.com' +/runbox/INBOX.Archiv
+#save-hook '~C @gmail.com' +/gmail/Keep
+save-hook '~C @gmail.com' +'/gmail/[Gmail].Bin'
 
 set mbox_type=Maildir
 
@@ -62,9 +75,9 @@ set header_cache=~/Localmail/hcache
 
 # Sidebar
 # mailboxes +runbox/INBOX +runbox/Drafts +runbox/Sent +runbox/INBOX.Archiv +runbox/Spam +runbox/Trash +gmail/INBOX +'gmail/[Gmail].Sent Mail' +'gmail/[Gmail].Spam' +'gmail/[Gmail].Bin' +'gmail/[Gmail].All Mail' 
-set sidebar_visible
+#set sidebar_visible
 set sidebar_width = 30
-set sidebar_format = "%B %* %?N?%N?"
+set sidebar_format = "%D %* %?N?%N?"
 #set sidebar_component_depth = 1
 #set sidebar_folder_indent
 set sidebar_divider_char = ' | '
@@ -73,13 +86,14 @@ set sidebar_divider_char = ' | '
 #set sidebar_indent_string = '  '
 #mailboxes =ALL-INBOXES
 #mailboxes =runbox
-#virtual-mailboxes "Unified Inbox" "notmuch://?query=folder:gmail/INBOX OR folder:outlook/Inbox OR folder:runbox/INBOX"
-mailboxes =runbox/INBOX #=gmail/INBOX =outlook/Inbox
-#mailboxes =runbox/Drafts =runbox/Sent =runbox/INBOX.Archiv =runbox/Spam =runbox/Trash
-mailboxes =gmail/INBOX
-#mailboxes =gmail/[Gmail].Drafts =gmail/'[Gmail].Sent Mail' =gmail/'[Gmail].All Mail' =gmail/[Gmail].Spam =gmail/[Gmail].Bin
-mailboxes =outlook/Inbox
-#mailboxes =outlook/Drafts =outlook/Sent =outlook/Archive =outlook/Junk =outlook/Trash
+virtual-mailboxes "Unified Inbox" "notmuch://?query=folder:gmail/INBOX OR folder:outlook/Inbox OR folder:runbox/INBOX"
+mailboxes =local/Drafts
+mailboxes =runbox/INBOX =gmail/INBOX =outlook/Inbox
+#mailboxes =gmail/INBOX
+#mailboxes =outlook/Inbox
+mailboxes =runbox/Drafts =runbox/Sent =runbox/INBOX.Archiv =runbox/Spam =runbox/Trash
+mailboxes =gmail/[Gmail].Drafts =gmail/'[Gmail].Sent Mail' =gmail/'[Gmail].All Mail' =gmail/[Gmail].Spam =gmail/[Gmail].Bin =gmail/Keep
+mailboxes =outlook/Drafts =outlook/Sent =outlook/Archive =outlook/Junk =outlook/Trash
 
 # Sender information
 set realname="Markus Koops"
@@ -94,15 +108,7 @@ unignore from: subject to cc date #x-mailer x-url user-agent
 # Display the fields in this order
 hdr_order date from to cc subject
 
-# simulate the old url menu
-macro index,pager,attach,compose \cb "\
-<enter-command> set my_pipe_decode=\$pipe_decode pipe_decode<Enter>\
-<pipe-message> urlview<Enter>\
-<enter-command> set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<Enter>" \
-"call urlview to extract URLs out of a message"
 
-# Show documentation when pressing F1
-macro generic,pager <F1> "<shell-escape> less /usr/share/doc/neomutt/manual.txt<Enter>" "show NeoMutt documentation"
 
 # show the incoming mailboxes list (just like "neomutt -y") and back when pressing "y"
 
